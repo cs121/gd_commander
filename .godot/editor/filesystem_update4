@@ -1,0 +1,13 @@
+res://Scenes/main_scene.tscn
+res://Assets/Shaders/shader_explosion_cloud.tres
+res://Assets/Shaders/streak_shader.tres
+res://Assets/Themes/button_theme.tres
+res://Assets/Themes/label_theme.tres
+res://Scripts/input_manager.gd
+res://Assets/Shaders/FireShader.tres
+res://Assets/Particles/fire_particle_process_material.tres
+res://Assets/Shaders/FresnelAura.tres
+res://Scenes/Ships/PlayerShips/PlayerFighter.tscn
+res://Scenes/Ships/Enemy/fighter.tscn
+res://Scenes/Ships/Player/PlayerFighter.tscn
+res://testing.tscn

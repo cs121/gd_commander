@@ -1,10 +1,57 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcgf6dagmv3xb"]
+[gd_scene load_steps=9 format=3 uid="uid://cqphh4q4e6ihr"]
 
 [ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_co24e"]
-[ext_resource type="Script" uid="uid://805tinnvkvpn" path="res://testing.gd" id="1_kj3p2"]
 [ext_resource type="PackedScene" uid="uid://dd7gue1cwbx6u" path="res://Assets/Particles/massive_explosion.tscn" id="3_feb8i"]
 [ext_resource type="PackedScene" uid="uid://bvgxwc28k1fvx" path="res://Assets/Ships/beam_destroyer_chassis.tscn" id="3_lc7k4"]
 [ext_resource type="PackedScene" uid="uid://cxd7ahrv8vrys" path="res://Assets/Ships/frigate_chassis.tscn" id="4_jn4p2"]
+
+[sub_resource type="GDScript" id="GDScript_kj3p2"]
+script/source = "extends Level
+
+@onready var carrier1:=$CarrierChassis
+@onready var carrier2:=$CarrierChassis2
+@onready var destroyer:=$BeamDestroyerChassis
+@onready var frigate:=$FrigateChassis
+
+
+func _on_timer_timeout() -> void:
+	# Blow up carrier 1
+	#$MassiveExplosion.play_at(carrier1.global_position)
+	$MassiveExplosion.play_with_transform(carrier1.global_position, carrier1.transform)
+	carrier1.queue_free()
+
+
+func _on_timer_2_timeout() -> void:
+	#$MassiveExplosion.stop()
+	# Blow up carrier 2
+	#$MassiveExplosion.play_at(carrier2.global_position)
+	$MassiveExplosion.play_with_transform(carrier2.global_position, carrier2.transform)
+	carrier2.queue_free()
+
+
+func _on_timer_3_timeout() -> void:
+	#$MassiveExplosion.stop()
+	# Blow up the frigate
+	#$MassiveExplosion.play_at(frigate.global_position)
+	$MassiveExplosion.play_with_transform(frigate.global_position, frigate.transform)
+	frigate.queue_free()
+
+
+func _on_timer_4_timeout() -> void:
+	#$MassiveExplosion.stop()
+	# Blow up the destroyer
+	#$MassiveExplosion.play_at(destroyer.global_position)
+	$MassiveExplosion.play_with_transform(destroyer.global_position, destroyer.transform)
+	destroyer.queue_free()
+
+
+# Enable easy exit
+func _input(_event: InputEvent) -> void:
+	# Exit to main menu on exit, or if we're already
+	# on the main menu, exit game
+	if Input.is_action_just_pressed('exit'):
+		get_tree().quit()
+"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kj3p2"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
@@ -22,7 +69,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_kj3p2")
+script = SubResource("GDScript_kj3p2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jn4p2")
