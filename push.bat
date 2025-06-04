@@ -1,3 +1,5 @@
 @echo off
 echo PUSH
-git push -u origin main
+git add .
+git commit -m "commit"
+git push origin main
