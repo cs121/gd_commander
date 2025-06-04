@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://diemqdllmorgy"]
 
-[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/Enemy/corvette.tscn" id="1_nfgym"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/Enemy/todo/corvette.tscn" id="1_nfgym"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_oykks"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_by5cy"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="3_35x76"]

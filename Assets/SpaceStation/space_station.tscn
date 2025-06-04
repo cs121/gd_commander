@@ -1,6 +1,6 @@
 [gd_scene load_steps=133 format=4 uid="uid://br3bb2mewavvc"]
 
-[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/Ships/Enemy/Fighter/ship.gd" id="1_usm2i"]
+[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/Ships/baseship.gd" id="1_usm2i"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/Helpers/health_component.tscn" id="2_eniao"]
 
 [sub_resource type="Animation" id="Animation_tgpxr"]

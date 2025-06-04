@@ -11,3 +11,8 @@ res://Scenes/Ships/PlayerShips/PlayerFighter.tscn
 res://Scenes/Ships/Enemy/fighter.tscn
 res://Scenes/Ships/Player/PlayerFighter.tscn
 res://testing.tscn
+res://Scenes/Ships/Player/Hornet.tscn
+res://Scenes/Ships/Player/Broadsword.tscn
+res://Scripts/Objects/Orb.gd
+res://Levels/Level01/level1.tscn
+res://Scenes/Ships/Enemy/todo/corvette.tscn

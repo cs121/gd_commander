@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dct3loj10mg5k"]
 
-[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/Ships/Enemy/Fighter/ship.gd" id="1_uw5oo"]
+[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/Ships/baseship.gd" id="1_uw5oo"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/vfx/Effects/burning_trail.tscn" id="2_6e5lt"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/Helpers/aim_assist.tscn" id="2_120ti"]
 [ext_resource type="PackedScene" uid="uid://ctw16pilpn8rk" path="res://Assets/Ships/bomber_chassis.tscn" id="3_hrk35"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://8dxylurtfwp1"]
 
-[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/Ships/Enemy/Fighter/ship.gd" id="1_bfcrw"]
+[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/Ships/baseship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Weapons/Guns/burst_gun.tscn" id="2_2p718"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Weapons/Projectiles/missile.tscn" id="3_crlbv"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/Helpers/missile_lock_group.tscn" id="4_vmlm7"]

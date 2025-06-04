@@ -3,10 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_02qsi"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/Helpers/team_setup.gd" id="2_20fsw"]
-[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/fighter.tscn" id="2_wndl6"]
-[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/Enemy/corvette.tscn" id="3_8iyj5"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="2_wndl6"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/Enemy/todo/corvette.tscn" id="3_8iyj5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="4_owcqu"]
-[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/Player/PlayerCorvette.tscn" id="6_t0qrf"]
+[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/Player/todo/PlayerCorvette.tscn" id="6_t0qrf"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
 panorama = ExtResource("1_2nnjr")

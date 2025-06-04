@@ -1,13 +1,13 @@
 class_name Orb extends StaticBody3D
 
-const ORB_SCENE : PackedScene = preload("res://Scenes/orb.tscn")
+const ORB_SCENE : PackedScene = preload("res://Scenes/Objects/orb.tscn")
 
 signal destroyed
 
 # Sound to be played on death. Self-freeing.
 @export var pop_player: PackedScene
 
-const MAX_COORD: int = 200
+const MAX_COORD: int = 600
 
 # This function is like a constructor and helps make the
 # Orb more self-contained.

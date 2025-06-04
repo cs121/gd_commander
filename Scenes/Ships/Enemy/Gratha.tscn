@@ -1,0 +1,97 @@
+[gd_scene load_steps=19 format=3 uid="uid://cb4tad0jadv82"]
+
+[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/Ships/baseship.gd" id="1_cn6fq"]
+[ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/Helpers/aim_assist.tscn" id="2_wevbw"]
+[ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/vfx/Effects/burning_trail.tscn" id="3_jo6xv"]
+[ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="4_ll6nv"]
+[ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/vfx/Effects/contrail.tscn" id="5_34f2j"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/Helpers/health_component.tscn" id="6_a12hc"]
+[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/vfx/Effects/hit_feedback.tscn" id="7_feuud"]
+[ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/Helpers/missile_lock_group.tscn" id="8_y16kq"]
+[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Weapons/Guns/gun.tscn" id="9_iiv8t"]
+[ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Weapons/Projectiles/missile.tscn" id="10_8md41"]
+[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Helpers/shield.tscn" id="11_tvccd"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="12_3r8k0"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/Helpers/target_reticles.tscn" id="13_qtfh2"]
+[ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/Helpers/weapon_handler.tscn" id="14_8tcve"]
+[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Weapons/Projectiles/bullet_ray_basic.tscn" id="15_4ant1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
+radius = 2.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dy1g"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("12_3r8k0")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_6a830"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_6dy1g")
+
+[node name="Fighter" type="CharacterBody3D" groups=["damageable", "team member"]]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_cn6fq")
+deathExplosion = 9
+finalExplosion = 8
+
+[node name="AimAssist" parent="." instance=ExtResource("2_wevbw")]
+angle_assist_limit = 10.0
+
+[node name="BurningTrail" parent="." instance=ExtResource("3_jo6xv")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="FighterChassisRing" parent="." instance=ExtResource("4_ll6nv")]
+transform = Transform3D(-1, 8.35188e-23, -8.74228e-08, -2.68659e-16, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_ydoww")
+
+[node name="Contrail" parent="." instance=ExtResource("5_34f2j")]
+
+[node name="DebugLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+billboard = 1
+fixed_size = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_a12hc")]
+
+[node name="HitFeedback" parent="." instance=ExtResource("7_feuud")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MissileLockGroup" parent="." instance=ExtResource("8_y16kq")]
+npc_missile_lock = true
+missile_range = 1000.0
+
+[node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("9_iiv8t")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bullet = ExtResource("10_8md41")
+damage = 10.0
+bullet_speed = 150.0
+bullet_timeout = 5.0
+fire_rate = 0.033
+
+[node name="Shield" parent="." instance=ExtResource("11_tvccd")]
+transform = Transform3D(20, 1.67038e-21, 3.38813e-21, 0, 20, 0, 3.38813e-21, 0, 20, 0, 0, 0)
+
+[node name="FresnelAura" parent="Shield" index="0"]
+mesh = SubResource("SphereMesh_6a830")
+
+[node name="TargetReticles" parent="." instance=ExtResource("13_qtfh2")]
+
+[node name="WeaponHandler" parent="." instance=ExtResource("14_8tcve")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Gun" parent="WeaponHandler" instance=ExtResource("9_iiv8t")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
+bullet = ExtResource("15_4ant1")
+bullet_speed = 600.0
+fire_rate = 8.0
+
+[editable path="Shield"]
