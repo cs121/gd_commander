@@ -16,3 +16,4 @@ res://Scenes/Ships/Player/Broadsword.tscn
 res://Scripts/Objects/Orb.gd
 res://Levels/Level01/level1.tscn
 res://Scenes/Ships/Enemy/todo/corvette.tscn
+res://Levels/Level01/level1.gd
