@@ -30,7 +30,6 @@ EventsBus="*res://Scripts/Autoloads/events_bus.gd"
 window/size/mode=4
 window/size/resizable=false
 window/size/borderless=true
-window/stretch/mode="viewport"
 
 [global_group]
 

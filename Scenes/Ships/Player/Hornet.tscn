@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://conb7kdfab3ks"]
+[gd_scene load_steps=11 format=3 uid="uid://conb7kdfab3ks"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="1_7r32l"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="2_txrwp"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="5_oyaoq"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/vfx/Effects/engine_audio_visuals.tscn" id="6_jay2w"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_j06gp"]
+[ext_resource type="Texture2D" uid="uid://jrdgjl0pb5x7" path="res://Assets/Images/cockpits/Privateer_-_Cockpit_-_Centurion_-_Off.png" id="8_2bwh5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_se4th"]
 resource_local_to_scene = true
@@ -43,5 +44,12 @@ texture = ExtResource("4_tjq8h")
 [node name="EngineAudioVisuals" parent="." index="13" instance=ExtResource("6_jay2w")]
 
 [node name="PlayerMovementV4" parent="." index="14" instance=ExtResource("7_j06gp")]
+
+[node name="Privateer-Cockpit-Centurion-Off" type="Sprite2D" parent="." index="15"]
+z_index = 1
+position = Vector2(0, 200)
+scale = Vector2(6, 6)
+texture = ExtResource("8_2bwh5")
+centered = false
 
 [editable path="Shield"]

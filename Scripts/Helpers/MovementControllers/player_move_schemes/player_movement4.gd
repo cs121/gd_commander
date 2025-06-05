@@ -135,8 +135,28 @@ func move_and_turn(mover, delta: float) -> void:
 	# === Triebwerksgeräusche verwalten ===
 	handle_engine_audio(mover)
 
+	# === Cockpit-Screenshake bei hoher Geschwindigkeit ===
+	var speed_ratio = mover.velocity.length() / max_speed
+	if speed_ratio > 0.6 and not afterburner_active:
+		_apply_cockpit_shake((speed_ratio - 0.6) * 0.5)
+	else:
+		_reset_cockpit_shake()
+
 	# === Bewegung und Rotation anwenden ===
 	super.move_and_turn(mover, delta)
+
+func _apply_cockpit_shake(strength: float) -> void:
+	if $Body/Head/FirstPersonCamera:
+		var shake_offset = Vector3(
+			randf_range(-1, 1),
+			randf_range(-1, 1),
+			0
+		) * strength * 0.1
+		$Body/Head/FirstPersonCamera.translation = shake_offset
+
+func _reset_cockpit_shake() -> void:
+	if $Body/Head/FirstPersonCamera:
+		$Body/Head/FirstPersonCamera.translation = Vector3.ZERO
 
 func _handle_afterburner(delta: float) -> void:
 	if im.afterburner and !afterburner_active and afterburner_cooldown_timer <= 0.0:
