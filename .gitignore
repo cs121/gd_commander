@@ -8,6 +8,8 @@
 *.log
 *.cfg
 *.mono/
+*.tmp
+*.cache
 
 # Betriebssystem-spezifisch
 .DS_Store
