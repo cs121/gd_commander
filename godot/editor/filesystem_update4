@@ -1,0 +1,4 @@
+res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn
+res://Assets/Shaders/shader_explosion_cloud.tres
+res://Assets/Shaders/streak_shader.tres
+res://Scripts/Helpers/MovementControllers/player_move_schemes/player_movement4.gd

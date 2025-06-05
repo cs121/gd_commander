@@ -12,7 +12,11 @@ config_version=5
 
 config/name="Wing Commander"
 run/main_scene="res://Scenes/main_scene.tscn"
+config/use_hidden_project_data_directory=false
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [autoload]
@@ -24,7 +28,9 @@ EventsBus="*res://Scripts/Autoloads/events_bus.gd"
 [display]
 
 window/size/mode=4
+window/size/resizable=false
 window/size/borderless=true
+window/stretch/mode="viewport"
 
 [global_group]
 
@@ -82,10 +88,10 @@ retarget={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(169, 20),"global_position":Vector2(178, 68),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
-drift={
+afterburner={
 "deadzone": 0.5,
 "events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":9,"pressure":0.0,"pressed":true,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":65,"location":0,"echo":false,"script":null)
 ]
 }
 right_stick_up={
@@ -174,4 +180,10 @@ pause={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
+driver/threads/thread_model=2
+textures/lossless_compression/force_png=true
+environment/ssao/quality=0
+textures/decals/filter=0
+occlusion_culling/use_occlusion_culling=true
 mesh_lod/lod_change/threshold_pixels=0.0

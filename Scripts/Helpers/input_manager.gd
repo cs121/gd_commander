@@ -13,8 +13,8 @@ var retarget_just_released := false # Used to fire missile
 var shoot_pressed := false
 var shoot_just_pressed := false
 var brake := false
-var drift := false
 var accelerate := false
+var afterburner := false
 var accelerate_just_pressed := false
 var left_right1 := 0.0 # Left stick
 var left_right2 := 0.0 # Right stick
@@ -51,8 +51,8 @@ func update() -> void:
 	shoot_pressed = Input.is_action_pressed("shoot")
 	shoot_just_pressed = Input.is_action_just_pressed("shoot")
 	brake = Input.is_action_pressed("brake")
-	drift = Input.is_action_pressed("drift")
 	accelerate = Input.is_action_pressed("accelerate")
+	afterburner = Input.is_action_pressed("afterburner")
 	accelerate_just_pressed = Input.is_action_just_pressed("accelerate")
 	
 	if use_mouse_and_keyboard:

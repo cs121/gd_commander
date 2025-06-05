@@ -61,6 +61,7 @@ billboard = 1
 fixed_size = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
+max_health = 100.0
 
 [node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -79,6 +80,7 @@ fire_rate = 0.033
 
 [node name="Shield" parent="." instance=ExtResource("23_fxr37")]
 transform = Transform3D(20, 1.67038e-21, 3.38813e-21, 0, 20, 0, 3.38813e-21, 0, 20, 0, 0, 0)
+max_health = 100
 
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_6a830")

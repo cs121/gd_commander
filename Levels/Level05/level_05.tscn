@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="2_wndl6"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/Enemy/todo/corvette.tscn" id="3_8iyj5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="4_owcqu"]
-[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/Player/todo/PlayerCorvette.tscn" id="6_t0qrf"]
+[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/Player/Hornet.tscn" id="7_02qsi"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
 panorama = ExtResource("1_2nnjr")
@@ -95,5 +95,4 @@ transform = Transform3D(-0.983096, 3.49692e-08, 0.183094, 4.37114e-08, 1, 4.3711
 
 [node name="NPCFighterController" parent="BlueTeam/Corvette" instance=ExtResource("4_owcqu")]
 
-[node name="PlayerVette" parent="BlueTeam" instance=ExtResource("6_t0qrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 164.656)
+[node name="Hornet" parent="BlueTeam" instance=ExtResource("7_02qsi")]

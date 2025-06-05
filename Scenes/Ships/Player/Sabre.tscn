@@ -19,7 +19,7 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_se4th")
 
-[node name="Fighter" instance=ExtResource("1_x31bj")]
+[node name="Sabre" instance=ExtResource("1_x31bj")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
 stream = ExtResource("2_7uijv")
