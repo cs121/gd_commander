@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cruqo01kbn3ab"]
 
 [ext_resource type="Script" uid="uid://7megq05mf7kt" path="res://Scripts/Helpers/shield.gd" id="1_xlxvf"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_1831n"]
+[ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="2_1831n"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/Helpers/hit_box_component.tscn" id="3_6jkow"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/Helpers/health_component.tscn" id="4_t4iu0"]
 
@@ -35,5 +35,10 @@ shape = SubResource("SphereShape3D_0x6dj")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_t4iu0")]
 
+[node name="VisibilityTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
+[connection signal="timeout" from="VisibilityTimer" to="." method="_on_visibility_timer_timeout"]

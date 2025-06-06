@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="1_7r32l"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="2_txrwp"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="3_piomx"]
+[ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="3_piomx"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="4_tjq8h"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="5_oyaoq"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/vfx/Effects/engine_audio_visuals.tscn" id="6_jay2w"]

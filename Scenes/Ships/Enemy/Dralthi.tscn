@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/Helpers/aim_assist.tscn" id="19_xjc2u"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/vfx/Effects/contrail.tscn" id="20_a8xhu"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Helpers/shield.tscn" id="23_fxr37"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="24_ovt4a"]
+[ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="24_ovt4a"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
 radius = 2.3

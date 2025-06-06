@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="3_vdt0h"]
 [ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/Objects/orb.tscn" id="4_syabc"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="5_74ca5"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_d02va"]
+[ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="5_d02va"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1crdq"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)

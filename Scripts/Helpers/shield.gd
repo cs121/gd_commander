@@ -10,7 +10,12 @@ class_name Shield
 
 @export var max_health := 10
 
+@export var transparency_visible := 0.0
+@export var transparency_default := 1.0
+
 @onready var shader_ref : ShaderMaterial = $FresnelAura.mesh.surface_get_material(0)
+@onready var visibility_timer := $VisibilityTimer
+
 var fresnel_power_current := 2.0
 var fresnel_power_default := 2.0
 var fresnel_power_when_struck := 0.05
@@ -21,22 +26,10 @@ var fresnel_emission_default := 1.0
 var fresnel_emission_when_struck := 100.0
 var fresnel_emission_lerp_speed := 10.0
 
-
-# Called when the node enters the scene tree for the first time.
-var visibility_timer := Timer.new()
-var transparency_default := 1.0
-var transparency_visible := 0.2
-
 func _ready() -> void:
 	$HealthComponent.set_max_health(max_health)
-
-	# Timer vorbereiten (einmalig)
-	visibility_timer.one_shot = true
-	visibility_timer.wait_time = 3.0
-	visibility_timer.timeout.connect(_on_visibility_timer_timeout)
-	add_child(visibility_timer)
-
-
+	shader_ref.set("shader_parameter/Transparency", transparency_default)
+	$FresnelAura.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -56,8 +49,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_health_component_health_lost() -> void:
 	# Schild sichtbar machen (sofort)
-	$FresnelAura.transparency = transparency_visible
+	shader_ref.set("shader_parameter/Transparency", transparency_visible)
 	$FresnelAura.visible = true
+	
 	# Shader-Flash wie bisher
 	fresnel_power_current = fresnel_power_when_struck
 	fresnel_emission_current = fresnel_emission_when_struck
@@ -65,9 +59,11 @@ func _on_health_component_health_lost() -> void:
 	# Rückkehr zur Unsichtbarkeit verzögert starten
 	visibility_timer.start()
 
+
 func _on_visibility_timer_timeout() -> void:
-	$FresnelAura.transparency = transparency_default
+	shader_ref.set("shader_parameter/Transparency", transparency_default)
 	$FresnelAura.visible = false
+
 
 
 func _on_health_component_died() -> void:

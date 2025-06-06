@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://bm3gcg5xbsv0"]
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://k125ekjy4epu"]
 
 [sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_6fgoh"]
 default_input_values = [2, false, 3, 2.0]
@@ -59,7 +59,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-723.949, 52.1445)
+graph_offset = Vector2(39.6499, 858.737)
 nodes/fragment/2/node = SubResource("VisualShaderNodeFresnel_6fgoh")
 nodes/fragment/2/position = Vector2(-140, 140)
 nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_pbrrv")
