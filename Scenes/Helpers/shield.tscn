@@ -23,6 +23,7 @@ script = ExtResource("1_xlxvf")
 explosion = 2
 
 [node name="FresnelAura" type="MeshInstance3D" parent="."]
+gi_mode = 2
 mesh = SubResource("SphereMesh_n464a")
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["shield"] instance=ExtResource("3_6jkow")]

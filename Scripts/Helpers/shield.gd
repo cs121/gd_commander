@@ -23,8 +23,19 @@ var fresnel_emission_lerp_speed := 10.0
 
 
 # Called when the node enters the scene tree for the first time.
+var visibility_timer := Timer.new()
+var transparency_default := 1.0
+var transparency_visible := 0.2
+
 func _ready() -> void:
 	$HealthComponent.set_max_health(max_health)
+
+	# Timer vorbereiten (einmalig)
+	visibility_timer.one_shot = true
+	visibility_timer.wait_time = 3.0
+	visibility_timer.timeout.connect(_on_visibility_timer_timeout)
+	add_child(visibility_timer)
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,9 +55,19 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_health_component_health_lost() -> void:
-	# Dramatically alter shield opacity and emission when struck
+	# Schild sichtbar machen (sofort)
+	$FresnelAura.transparency = transparency_visible
+	$FresnelAura.visible = true
+	# Shader-Flash wie bisher
 	fresnel_power_current = fresnel_power_when_struck
 	fresnel_emission_current = fresnel_emission_when_struck
+
+	# Rückkehr zur Unsichtbarkeit verzögert starten
+	visibility_timer.start()
+
+func _on_visibility_timer_timeout() -> void:
+	$FresnelAura.transparency = transparency_default
+	$FresnelAura.visible = false
 
 
 func _on_health_component_died() -> void:
@@ -60,3 +81,4 @@ func _on_health_component_died() -> void:
 	VfxManager.play(explosion, global_position)
 	# Delete self at the end of the frame
 	Callable(queue_free).call_deferred()
+	

@@ -63,6 +63,6 @@ shape = SubResource("SphereShape3D_wtdqg")
 [node name="TargetLeadIndicator" type="TextureRect" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.627451)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 64.0
+offset_bottom = 64.0
 texture = ExtResource("3_a50bn")

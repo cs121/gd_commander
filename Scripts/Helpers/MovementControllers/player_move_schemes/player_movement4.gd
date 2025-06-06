@@ -27,6 +27,10 @@ class_name PlayerMovement4 extends CharacterBodyControlParent
 # "asteroids" controls.
 #     No brakes (EXCEPT WE KEPT THEM IN FOR TESTING PURPOSES)
 
+@onready var camera_controller = get_node("%CameraGroup")
+@onready var first_person_camera = camera_controller.get_node("Body/Head/FirstPersonCamera")
+
+
 #Strength of movements under standard motion
 var pitch_std: float = 1.8
 var roll_std_left_stick: float = 1.2  # Doppelt so schnell Rollen bei Links/Rechts
@@ -137,26 +141,30 @@ func move_and_turn(mover, delta: float) -> void:
 
 	# === Cockpit-Screenshake bei hoher Geschwindigkeit ===
 	var speed_ratio = mover.velocity.length() / max_speed
-	if speed_ratio > 0.6 and not afterburner_active:
-		_apply_cockpit_shake((speed_ratio - 0.6) * 0.5)
+	if speed_ratio > 0.4:
+		_apply_cockpit_shake()
 	else:
-		_reset_cockpit_shake()
+		first_person_camera.position = Vector3.ZERO
 
 	# === Bewegung und Rotation anwenden ===
 	super.move_and_turn(mover, delta)
 
-func _apply_cockpit_shake(strength: float) -> void:
-	if $Body/Head/FirstPersonCamera:
-		var shake_offset = Vector3(
-			randf_range(-1, 1),
-			randf_range(-1, 1),
-			0
-		) * strength * 0.1
-		$Body/Head/FirstPersonCamera.translation = shake_offset
+func _apply_cockpit_shake() -> void:
+	if first_person_camera and Global.player:
+		var velocity = Global.player.velocity.length()
+		var speed_ratio = clamp(velocity / max_speed, 0.0, 1.0)
+		var strength = (speed_ratio - 0.4)  # Werte feinjustieren
+		var shake_offset = Vector3(randf_range(-.5, .5),randf_range(-.5, .5),0) * strength
+		first_person_camera.position = shake_offset
+		
+
+
+
 
 func _reset_cockpit_shake() -> void:
-	if $Body/Head/FirstPersonCamera:
-		$Body/Head/FirstPersonCamera.translation = Vector3.ZERO
+	if first_person_camera:
+		first_person_camera.position = Vector3.ZERO
+
 
 func _handle_afterburner(delta: float) -> void:
 	if im.afterburner and !afterburner_active and afterburner_cooldown_timer <= 0.0:

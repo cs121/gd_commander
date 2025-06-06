@@ -40,6 +40,7 @@ var hit_feedback:HitFeedback
 # npcs from shooting down their own missiles.
 var damage_exception:Ship
 var reticle:TargetReticles
+var shield: Shield
 
 
 #I really like the idea of _ready functions
@@ -74,6 +75,8 @@ func _ready() -> void:
 			# Connect signals with code
 			health_component.health_lost.connect(_on_health_component_health_lost)
 			health_component.died.connect(_on_health_component_died)
+		elif child is Shield:
+			shield = child
 		elif child is MissileLockGroup:
 			missile_lock = child
 		elif child is WeaponHandler:
@@ -155,14 +158,16 @@ func _on_death_timer_timeout() -> void:
 
 # ALL THE FOLLOWING CODE IS duplicated from hit_box_component
 
-func damage(amount:float, damager=null):
-	# A Ship shouldn't shoot down their own missiles
+func damage(amount: float, damager = null):
 	if damager and is_instance_valid(damage_exception) and damager == damage_exception:
 		return
-	if health_component:
+	if shield and shield.has_node("HealthComponent"):
+		shield.get_node("HealthComponent").health -= amount
+	elif health_component:
 		health_component.health -= amount
 	if hit_feedback:
 		hit_feedback.hit()
+
 
 
 func add_damage_exception(s:Ship) -> void:

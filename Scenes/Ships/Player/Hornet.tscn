@@ -40,6 +40,7 @@ offset_bottom = 40.0
 texture = ExtResource("4_tjq8h")
 
 [node name="CameraGroup" parent="." index="12" instance=ExtResource("5_oyaoq")]
+unique_name_in_owner = true
 
 [node name="EngineAudioVisuals" parent="." index="13" instance=ExtResource("6_jay2w")]
 
