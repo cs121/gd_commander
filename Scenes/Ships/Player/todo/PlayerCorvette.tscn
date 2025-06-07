@@ -1,14 +1,14 @@
 [gd_scene load_steps=14 format=3 uid="uid://bkwcr6mxtri7n"]
 
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/Enemy/todo/corvette.tscn" id="1_63oik"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_jvl32"]
+[ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="2_jvl32"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="2_t24ck"]
 [ext_resource type="Texture2D" uid="uid://yqry61o8jiwb" path="res://Assets/Images/crosshair177.png" id="3_0npbv"]
 [ext_resource type="Texture2D" uid="uid://bpdpseb3x2cbp" path="res://Assets/Images/crosshair026.png" id="4_4gytk"]
 [ext_resource type="Texture2D" uid="uid://b7foqk2u8ykv3" path="res://Assets/Images/crosshair054.png" id="5_aeijj"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Weapons/Guns/laser_gun.tscn" id="6_itfr8"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="8_m18g3"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="8_vlve7"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Audio/SoundEffects/aim_assist.wav" id="8_vlve7"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="9_0rmbx"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/vfx/Effects/engine_audio_visuals.tscn" id="10_t22nh"]
 

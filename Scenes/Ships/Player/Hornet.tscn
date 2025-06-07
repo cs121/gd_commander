@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://conb7kdfab3ks"]
+[gd_scene load_steps=14 format=3 uid="uid://conb7kdfab3ks"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="1_7r32l"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="2_txrwp"]
 [ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="3_piomx"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="4_tjq8h"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="5_oyaoq"]
@@ -11,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dup57p4ygajr1" path="res://Scenes/Weapons/Guns/laser_shotgun.tscn" id="7_0pqbe"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_j06gp"]
 [ext_resource type="Texture2D" uid="uid://jrdgjl0pb5x7" path="res://Assets/Images/cockpits/Privateer_-_Cockpit_-_Centurion_-_Off.png" id="8_2bwh5"]
-[ext_resource type="AudioStream" uid="uid://m3gr4i13fhcs" path="res://Assets/SoundEffects/Hit34.wav" id="9_yvihc"]
+[ext_resource type="AudioStream" uid="uid://m3gr4i13fhcs" path="res://Audio/SoundEffects/Hit34.wav" id="9_yvihc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_se4th"]
 resource_local_to_scene = true
@@ -25,11 +24,6 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_se4th")
 
 [node name="Hornet" instance=ExtResource("1_7r32l")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
-stream = ExtResource("2_txrwp")
-volume_db = -20.0
-pitch_scale = 0.5
 
 [node name="MissileLockGroup" parent="." index="8"]
 npc_missile_lock = false

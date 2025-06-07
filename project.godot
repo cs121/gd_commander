@@ -32,6 +32,10 @@ window/size/mode=4
 window/size/resizable=false
 window/size/borderless=true
 
+[global]
+
+SFX=true
+
 [global_group]
 
 "team color"=""
@@ -39,6 +43,13 @@ damageable=""
 "team member"=""
 "gun hardpoint"=""
 capital_ship="Group for capital ships so that things that prefer slow moving targets can find them."
+
+[importer_defaults]
+
+animation_library={
+&"animation/fps": 60.0,
+&"fbx/allow_geometry_helper_nodes": true
+}
 
 [input]
 
@@ -177,6 +188,11 @@ pause={
 3d_physics/layer_2="bullets"
 3d_physics/layer_3="near_miss"
 3d_physics/layer_4="shields"
+
+[navigation]
+
+3d/default_cell_size=0.5
+3d/default_cell_height=0.5
 
 [rendering]
 

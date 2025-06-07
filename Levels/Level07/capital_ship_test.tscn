@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_e2ue2"]
 [ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/Ships/Enemy/todo/capital_ship_frigate.tscn" id="2_jciow"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/Enemy/todo/corvette.tscn" id="3_gy535"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="4_5hyc7"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="5_707l7"]
+[ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="4_5hyc7"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Audio/SoundEffects/aim_assist.wav" id="5_707l7"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="6_ft4d0"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="7_bgk5p"]
 

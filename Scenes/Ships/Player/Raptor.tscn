@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://6jchsjiiy7d7"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="1_legxy"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="2_c1a7y"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="3_p7s2p"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Audio/SoundEffects/aim_assist.wav" id="2_c1a7y"]
+[ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="3_p7s2p"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="4_asuyd"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="5_ogxnc"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/vfx/Effects/engine_audio_visuals.tscn" id="6_2p6pq"]
