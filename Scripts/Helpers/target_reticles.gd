@@ -53,24 +53,32 @@ var camera:Camera3D
 @onready var distant_reticle: TextureRect = $DistantReticle
 @onready var targeted_reticle: TextureRect = $TargetedReticle
 
-# Attributes
+# Blink logic for targeted reticle
+@onready var blink_timer := Timer.new()
+var blink_state := true
+
 # reticle_offset is half the reticle width and height so
 # they can more easily be displayed centered.
 var offscreen_reticle_offset:Vector2
 var viewport_center:Vector2
 var max_reticle_position:Vector2
 
+# Reticle to use in this frame
+var reticle_to_use: TextureRect
+
+# Enum for target type
+enum TargetType { ENEMY, FRIENDLY, NEUTRAL }
 
 var is_targeted:bool:
 	set(value):
 		is_targeted = value
-		if !is_targeted:
+		if is_targeted:
+			blink_timer.start()
+		else:
+			blink_timer.stop()
+			targeted_reticle.visible = false
 			# Set to semi transparent
 			distant_reticle.modulate = Color(distant_reticle.modulate, 0.25)
-		else:
-			# Set to no transparency
-			distant_reticle.modulate = Color(distant_reticle.modulate, 1.0)
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -87,6 +95,17 @@ func _ready():
 	# the reticle can go so that it's still visible:
 	max_reticle_position = viewport_center - offscreen_reticle_offset
 
+	# Add blink timer for targeted reticle
+	blink_timer.wait_time = 0.3
+	blink_timer.one_shot = false
+	blink_timer.timeout.connect(_on_blink_timer_timeout)
+	add_child(blink_timer)
+
+func _on_blink_timer_timeout():
+	# Blink targeted reticle if visible
+	if is_targeted:
+		blink_state = !blink_state
+		targeted_reticle.visible = blink_state
 
 func _process(_delta):
 	hide_all() # Reset all to hidden
@@ -99,7 +118,6 @@ func _process(_delta):
 	# Get distance to camera
 	cam_distance = global_position.distance_squared_to(camera.global_position)
 	# Choose between near and far reticles
-	var reticle_to_use:TextureRect
 	if cam_distance > distance_cutoff_sqd:
 		reticle_to_use = distant_reticle
 	elif is_targeted:
@@ -108,25 +126,9 @@ func _process(_delta):
 		reticle_to_use = target_reticle
 	# Try to put reticle on screen
 	if camera.is_position_in_frustum(global_position):
-		# Scale reticle size and transparency with distance,
-		# close up it should be large and transparent
-		# Percent is clamped between 0 and 1
-		#var percent:float = 1.0 - clamp(global_position.distance_squared_to(camera.global_position)/scaling_factor, 0.0, 1.0)
-		#print(percent)
-		#Keep it between 64 and 128 pixels
-		#var dimension:int = int(percent*(256-4)+4)
-		#dimension = clamp(dimension, 64, 128)
-		#target_reticle.set_size(Vector2(dimension, dimension))
-		#target_reticle.size = Vector2(dimension, dimension)
-		#reticle_offset = target_reticle.size/2.0
-		# Keep transparency between 0 and 255
-		#var alpha:int = 255 - int(percent*255)
-		#target_reticle.modulate = Color(target_reticle.modulate, alpha)
 		Global.set_reticle(camera, reticle_to_use, global_position)
-		
 	elif is_targeted: # Show at most one offscreen reticle for targeted unit
 		display_offscreen_reticle()
-
 
 # This was moved into a function for organizational purposes
 func display_offscreen_reticle() -> void:
@@ -144,16 +146,23 @@ func display_offscreen_reticle() -> void:
 	var angle = Vector2.UP.angle_to(reticle_position)
 	offscreen_reticle.rotation = angle
 
-
 func hide_all() -> void:
 	target_reticle.hide()
 	distant_reticle.hide()
 	offscreen_reticle.hide()
 	targeted_reticle.hide()
 
-
 func set_color(c:Color) -> void:
 	target_reticle.modulate = Color(c, 0.25)
 	offscreen_reticle.modulate = Color(c, 1.0) # no transparency
 	distant_reticle.modulate = Color(c, 0.25)
 	targeted_reticle.modulate = Color(c, 1.0) # no transparency
+
+func set_target_status(status: TargetType) -> void:
+	match status:
+		TargetType.ENEMY:
+			set_color(Color.RED)
+		TargetType.FRIENDLY:
+			set_color(Color.GREEN)
+		TargetType.NEUTRAL:
+			set_color(Color.YELLOW)

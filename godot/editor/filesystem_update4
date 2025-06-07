@@ -14,3 +14,10 @@ res://Levels/Level05/level_05.tscn
 res://Scenes/Ships/Player/Hornet.tscn
 res://Scenes/Helpers/camera_group.tscn
 res://Scenes/Ships/Enemy/Dralthi.tscn
+res://Scripts/Ships/baseship.gd
+res://Scripts/Helpers/target_reticles.gd
+res://Assets/SpaceStation/space_station.tscn
+res://Scenes/Weapons/Projectiles/projectile.tscn
+res://Scenes/Helpers/hit_box_component.tscn
+res://Scripts/audiomanager.gd
+res://Audio/audio_config.ini

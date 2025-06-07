@@ -1,13 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://conb7kdfab3ks"]
+[gd_scene load_steps=15 format=3 uid="uid://conb7kdfab3ks"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="1_7r32l"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="2_txrwp"]
 [ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="3_piomx"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="4_tjq8h"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="5_oyaoq"]
+[ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Weapons/Guns/burst_gun.tscn" id="5_svvpg"]
+[ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Weapons/Guns/laser_gun.tscn" id="6_cr63k"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/vfx/Effects/engine_audio_visuals.tscn" id="6_jay2w"]
+[ext_resource type="PackedScene" uid="uid://dup57p4ygajr1" path="res://Scenes/Weapons/Guns/laser_shotgun.tscn" id="7_0pqbe"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_j06gp"]
 [ext_resource type="Texture2D" uid="uid://jrdgjl0pb5x7" path="res://Assets/Images/cockpits/Privateer_-_Cockpit_-_Centurion_-_Off.png" id="8_2bwh5"]
+[ext_resource type="AudioStream" uid="uid://m3gr4i13fhcs" path="res://Assets/SoundEffects/Hit34.wav" id="9_yvihc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_se4th"]
 resource_local_to_scene = true
@@ -39,6 +43,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_tjq8h")
 
+[node name="BurstGun" parent="WeaponHandler" index="1" instance=ExtResource("5_svvpg")]
+
+[node name="LaserGun" parent="WeaponHandler" index="2" instance=ExtResource("6_cr63k")]
+
+[node name="LaserShotgun" parent="WeaponHandler" index="3" instance=ExtResource("7_0pqbe")]
+
 [node name="CameraGroup" parent="." index="12" instance=ExtResource("5_oyaoq")]
 unique_name_in_owner = true
 
@@ -52,5 +62,14 @@ position = Vector2(0, 200)
 scale = Vector2(6, 6)
 texture = ExtResource("8_2bwh5")
 centered = false
+
+[node name="Sounds" type="Node3D" parent="." index="16"]
+transform = Transform3D(1, 4.37114e-08, -1.91069e-15, -4.37114e-08, 1, -4.37114e-08, -1.91069e-15, 4.37114e-08, 1, 0, 0, 0)
+
+[node name="hit_sound" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource("9_yvihc")
+
+[node name="Shield_damage_player" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource("9_yvihc")
 
 [editable path="Shield"]

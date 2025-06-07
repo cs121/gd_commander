@@ -31,7 +31,7 @@ var death_animation_timer:Timer
 # The following 4 variables are duplicates of the code
 # in hit_box_component.
 # This will be populated probably only for the player
-var got_hit_audio:AudioStreamPlayer
+
 # I'll need some other system if I want different
 # audio cues for taking damage or whatever.
 var hit_feedback:HitFeedback
@@ -82,8 +82,8 @@ func _ready() -> void:
 		elif child is WeaponHandler:
 			weapon_handler = child
 		# The following are all from hit_box_component
-		elif child is AudioStreamPlayer:
-			got_hit_audio = child
+		#elif child is AudioStreamPlayer:
+		#	got_hit_audio = child
 		elif child is HitFeedback:
 			hit_feedback = child
 		elif child is TargetReticles:
@@ -112,13 +112,14 @@ func get_current_gun() -> Gun:
 
 
 func _on_health_component_health_lost() -> void:
-	# Communicate damage to the controller.
-	# This will let npcs take evasive action.
 	if controller:
 		controller.took_damage()
-	# Trail smoke and sparks when damaged
 	if health_component and burning_trail:
 		burning_trail.display_damage(health_component.get_percent_health())
+	
+	var audio_manager = get_node_or_null("/root/AudioManager")
+	if audio_manager:
+		audio_manager.play_hit(global_position)
 
 
 func _on_health_component_died() -> void:
@@ -163,16 +164,31 @@ func damage(amount: float, damager = null):
 		return
 	if shield and shield.has_node("HealthComponent"):
 		shield.get_node("HealthComponent").health -= amount
+		var audio_manager = get_node_or_null("/root/AudioManager")
+		if audio_manager:
+			audio_manager.play_shield_hit(global_position)
 	elif health_component:
 		health_component.health -= amount
+		var audio_manager = get_node_or_null("/root/AudioManager")
+		if audio_manager:
+			audio_manager.play_hit(global_position)
+
 	if hit_feedback:
 		hit_feedback.hit()
 
+func _play_shield_hit_sound():
+	var shield_hit_audio = $Shield_damage_player # Pfad anpassen
+	if shield_hit_audio:
+		shield_hit_audio.play()
+
+func _play_hit_sound():
+	var hit_audio = $hit_sound # Pfad anpassen
+	if hit_audio:
+		hit_audio.play()
 
 
 func add_damage_exception(s:Ship) -> void:
 	damage_exception = s
-
 
 # This is called when the player targets this hitbox
 # component. However, in the future, I'd like it to
@@ -206,8 +222,10 @@ func missile_inbound(_targeter:Node3D) -> void:
 # on the hitbox side, you'll also need to adjust
 # the collision bitmask.
 func _on_area_entered(_area: Area3D) -> void:
-	if got_hit_audio:
-		got_hit_audio.play()
+	var audio_manager = get_node_or_null("/root/AudioManager")
+	if audio_manager:
+		audio_manager.play_hit(global_position)
 func _on_body_entered(_body: Node3D) -> void:
-	if got_hit_audio:
-		got_hit_audio.play()
+	var audio_manager = get_node_or_null("/root/AudioManager")
+	if audio_manager:
+		audio_manager.play_final_explosion(global_position)

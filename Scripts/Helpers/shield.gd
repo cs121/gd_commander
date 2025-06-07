@@ -10,8 +10,8 @@ class_name Shield
 
 @export var max_health := 10
 
-@export var transparency_visible := 0.0
-@export var transparency_default := 1.0
+@export var transparency_visible := 1.0
+@export var transparency_default := 0.0
 
 @onready var shader_ref : ShaderMaterial = $FresnelAura.mesh.surface_get_material(0)
 @onready var visibility_timer := $VisibilityTimer
