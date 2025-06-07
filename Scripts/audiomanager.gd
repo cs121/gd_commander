@@ -20,11 +20,12 @@ func _init_audio_players() -> void:
 		var player := AudioStreamPlayer3D.new()
 		player.name = "AudioPlayer%d" % i
 		player.bus = "SFX"  # Optional: Verwende benannten AudioBus
-		player.unit_db = 0.0  # Lautstärke
+		player.volume_db = 0.0  # Lautstärke
 		player.stream_paused = false
 		player.autoplay = false
 		add_child(player)
 		_players.append(player)
+
 
 # INI-Datei laden und Soundgruppen erzeugen
 func load_sound_config(path: String) -> void:
