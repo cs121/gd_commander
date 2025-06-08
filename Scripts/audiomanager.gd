@@ -66,6 +66,8 @@ func play_3d(key: String, position: Vector3) -> void:
 			player.stream = stream
 			player.global_transform.origin = position
 			player.play()
+			push_warning("Spiele Sound %s" % key)
+			print ("Spiele Sound %s" % key)
 		else:
 			push_warning("AudioManager: Kein freier AudioPlayer für '%s'" % key)
 	else:

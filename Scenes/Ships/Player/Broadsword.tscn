@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5ildc6wlepn6"]
+[gd_scene load_steps=9 format=3 uid="uid://b5ildc6wlepn6"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="1_x3gcm"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Audio/SoundEffects/aim_assist.wav" id="2_apqus"]
 [ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="3_chlxn"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="4_8rrmy"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="5_xa2n5"]
@@ -19,12 +18,9 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_se4th")
 
-[node name="Fighter" instance=ExtResource("1_x3gcm")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
-stream = ExtResource("2_apqus")
-volume_db = -20.0
-pitch_scale = 0.5
+[node name="Broadsword" instance=ExtResource("1_x3gcm")]
+ship_name = "Broadsword"
+max_speed = 100.0
 
 [node name="MissileLockGroup" parent="." index="8"]
 npc_missile_lock = false

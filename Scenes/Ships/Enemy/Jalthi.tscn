@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Weapons/Guns/gun.tscn" id="9_0euxc"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Weapons/Projectiles/missile.tscn" id="10_kqspj"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Helpers/shield.tscn" id="11_syhky"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="12_tcqdd"]
+[ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="12_tcqdd"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/Helpers/target_reticles.tscn" id="13_4tcoe"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/Helpers/weapon_handler.tscn" id="14_a6cu4"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Weapons/Projectiles/bullet_ray_basic.tscn" id="15_iw03r"]
@@ -30,14 +30,21 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_6dy1g")
 
-[node name="Fighter" type="CharacterBody3D" groups=["damageable", "team member"]]
+[node name="Jalthi" type="CharacterBody3D" groups=["damageable", "team member"]]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_obyyg")
+ship_name = "Jalthi"
+max_speed = 100.0
+acceleration = 50.0
+turn_rate = null
+weapon_config = null
 deathExplosion = 9
 finalExplosion = 8
+death_animation_duration_min = null
+death_animation_duration_max = null
 
 [node name="AimAssist" parent="." instance=ExtResource("2_omnxb")]
 angle_assist_limit = 10.0

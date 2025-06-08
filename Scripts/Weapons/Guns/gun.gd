@@ -10,9 +10,6 @@ class_name Gun
 @export var spread_deg: float = 0.0 # Winkel in Grad
 @export var simultaneous_shots: int = 1
 
-@export var fire_sound: String = "weapon_fire_1"
-@export var reload_sound: String = "weapon_reload"
-
 @export var gun_animation: AnimationPlayer
 @export var muzzle_flash: VisualEffectSetting.VISUAL_EFFECT_TYPE
 @onready var audio_manager = get_node_or_null("/root/AudioManager")
@@ -57,7 +54,7 @@ func shoot(shooter: Node3D, target: Node3D = null, powered_up: bool = false) -> 
 
 		# Sound abspielen über AudioManager
 		if audio_manager:
-			audio_manager.play_3d(fire_sound, global_position)
+			audio_manager.play_3d("weapon_fire_1", global_position)
 
 		restart_timer()
 		setup_shoot_data(shooter, target, powered_up)

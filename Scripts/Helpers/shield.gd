@@ -8,10 +8,9 @@ class_name Shield
 
 @export var explosion:VisualEffectSetting.VISUAL_EFFECT_TYPE
 
-@export var max_health := 10
-
 @export var transparency_visible := 1.0
 @export var transparency_default := 0.0
+@export var max_health := 25
 
 @onready var shader_ref : ShaderMaterial = $FresnelAura.mesh.surface_get_material(0)
 @onready var visibility_timer := $VisibilityTimer
@@ -46,7 +45,6 @@ func _physics_process(delta: float) -> void:
 	# Otherwise, changing the above parameters on one shield
 	# changes it on ALL shields.
 
-
 func _on_health_component_health_lost() -> void:
 	# Schild sichtbar machen (sofort)
 	shader_ref.set("shader_parameter/Transparency", transparency_visible)
@@ -59,12 +57,9 @@ func _on_health_component_health_lost() -> void:
 	# Rückkehr zur Unsichtbarkeit verzögert starten
 	visibility_timer.start()
 
-
 func _on_visibility_timer_timeout() -> void:
 	shader_ref.set("shader_parameter/Transparency", transparency_default)
 	$FresnelAura.visible = false
-
-
 
 func _on_health_component_died() -> void:
 	# Disable further collisions and hide aura
@@ -77,4 +72,3 @@ func _on_health_component_died() -> void:
 	VfxManager.play(explosion, global_position)
 	# Delete self at the end of the frame
 	Callable(queue_free).call_deferred()
-	

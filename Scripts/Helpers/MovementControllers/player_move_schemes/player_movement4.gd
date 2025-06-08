@@ -42,9 +42,8 @@ var yaw_std: float = 1.2               # Doppelt so schnelle Yaw-Bewegung
 var friction_std: float = 0.8
 
 #forward motion
-var impulse_std: float = 60.0
+var impulse_std: float
 var current_impulse: float = 0.0
-var max_speed: float = impulse_std
 
 # Nachbrenner
 var afterburner_speed: float = 280.0
@@ -72,7 +71,11 @@ var im : InputManager
 
 
 func _ready() -> void:
-	impulse = impulse_std
+	
+	var ship = get_parent()
+	if ship and ship is Ship:
+		impulse_std = ship.max_speed
+	
 	im = Global.input_man
 	# Tell the global script who the player is.
 	# Since this is a player controller, it SHOULD
@@ -117,7 +120,7 @@ func move_and_turn(mover, delta: float) -> void:
 		mover.velocity = mover.velocity.lerp(Vector3.ZERO, friction * delta)
 
 	# === Geschwindigkeitslimitierung ===
-	var speed_limit = afterburner_speed if afterburner_active else max_speed
+	var speed_limit = afterburner_speed if afterburner_active else impulse_std
 	if mover.velocity.length() > speed_limit:
 		mover.velocity = mover.velocity.normalized() * speed_limit
 
@@ -140,7 +143,7 @@ func move_and_turn(mover, delta: float) -> void:
 	handle_engine_audio(mover)
 
 	# === Cockpit-Screenshake bei hoher Geschwindigkeit ===
-	var speed_ratio = mover.velocity.length() / max_speed
+	var speed_ratio = mover.velocity.length() / impulse_std
 	if speed_ratio > 0.4:
 		_apply_cockpit_shake()
 	else:
@@ -152,7 +155,7 @@ func move_and_turn(mover, delta: float) -> void:
 func _apply_cockpit_shake() -> void:
 	if first_person_camera and Global.player:
 		var velocity = Global.player.velocity.length()
-		var speed_ratio = clamp(velocity / max_speed, 0.0, 1.0)
+		var speed_ratio = clamp(velocity / impulse_std, 0.0, 1.0)
 		var strength = (speed_ratio - 0.4)  # Werte feinjustieren
 		var shake_offset = Vector3(randf_range(-.5, .5),randf_range(-.5, .5),0) * strength
 		first_person_camera.position = shake_offset

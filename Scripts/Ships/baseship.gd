@@ -2,6 +2,14 @@ class_name Ship extends CharacterBody3D
 
 signal destroyed
 
+@export var ship_name: String = "Generic"
+@export var max_speed: float = 200.0
+@export var acceleration: float = 30.0
+@export var turn_rate: float = 2.0
+@export var health_max: int = 100
+@export var shield_max: int = 25
+@export var weapon_config: String = "default"
+
 # Komponenten-Referenzen
 var aim_assist:AimAssist
 var burning_trail:BurningTrail # Visueller Effekt für Schäden
@@ -57,6 +65,11 @@ func _ready() -> void:
 		elif child is TargetReticles:
 			reticle = child
 
+	# Zusätzliche Soundinitialisierung (z.B. Motorlauf)
+	if audio_manager and engineAV:
+		# Starte Motorgeräusch als 3D-Loop am Schiff
+		audio_manager.play_3d_loop("engine_idle", global_position)
+
 # Physikverarbeitung – steuert Bewegung, Zielwahl, Schießen usw.
 func _physics_process(delta):
 	if controller:
@@ -64,6 +77,11 @@ func _physics_process(delta):
 		controller.select_target(self)            # Ziel auswählen
 		controller.shoot(self, delta)             # Waffe abfeuern
 		controller.misc_actions(self)             # Sonstige Aktionen (z. B. Waffenwechsel)
+
+	# Optional: Engine-Sound-Update bei Bewegung (z.B. Schub)
+	if audio_manager and engineAV:
+		var speed_factor = velocity.length() / engineAV.max_speed
+		audio_manager.set_3d_param("engine_idle", "speed", speed_factor)
 
 # Gibt derzeit aktive Waffe zurück (Gun oder MissileLauncher)
 func get_current_gun() -> Gun:
@@ -147,6 +165,9 @@ func add_damage_exception(s:Ship) -> void:
 func set_targeted(targeter:Node3D, value:bool) -> void:
 	if Global.player == targeter and reticle:
 		reticle.is_targeted = value
+		# Optional: Sound bei Anvisieren (wenn gewünscht)
+		if audio_manager and value:
+			audio_manager.play_3d("target_lock_on", global_position)
 
 # Wird aufgerufen, wenn Zielerfassung beginnt
 func seeking_lock(_targeter:Node3D) -> void:
@@ -183,3 +204,18 @@ func _on_body_entered(_body: Node3D) -> void:
 	if audio_manager:
 		# Spielt finale Explosion bei Kollision mit anderem Körper
 		audio_manager.play_3d("final_explosion_1", global_position)
+
+# Optional: Sound für Waffenwechsel, wenn controller.misc_actions das steuert
+func _on_weapon_changed():
+	if audio_manager:
+		audio_manager.play_3d("weapon_switch_1", global_position)
+
+# Optional: Sound bei Aktivierung des Schildes (falls relevant)
+func activate_shield():
+	if shield and audio_manager:
+		audio_manager.play_3d("shield_activate", global_position)
+
+# Optional: Sound bei Deaktivierung des Schildes (falls relevant)
+func deactivate_shield():
+	if shield and audio_manager:
+		audio_manager.play_3d("shield_deactivate", global_position)

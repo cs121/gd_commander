@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://6jchsjiiy7d7"]
+[gd_scene load_steps=9 format=3 uid="uid://6jchsjiiy7d7"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="1_legxy"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Audio/SoundEffects/aim_assist.wav" id="2_c1a7y"]
 [ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="3_p7s2p"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="4_asuyd"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="5_ogxnc"]
@@ -20,11 +19,7 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_se4th")
 
 [node name="Raptor" instance=ExtResource("1_legxy")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
-stream = ExtResource("2_c1a7y")
-volume_db = -20.0
-pitch_scale = 0.5
+ship_name = "Raptor"
 
 [node name="MissileLockGroup" parent="." index="8"]
 npc_missile_lock = false
