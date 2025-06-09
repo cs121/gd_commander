@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://6qsftwvn1vr"]
+[gd_scene load_steps=13 format=3 uid="uid://6qsftwvn1vr"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_02qsi"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/Helpers/team_setup.gd" id="2_20fsw"]
-[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="2_wndl6"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/baseship.tscn" id="2_wndl6"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/Enemy/todo/corvette.tscn" id="3_8iyj5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="4_owcqu"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/Player/Hornet.tscn" id="7_02qsi"]
+[ext_resource type="PackedScene" uid="uid://b1h3865cyeokb" path="res://Scenes/Ships/Player/Rapier.tscn" id="8_0ecm7"]
+[ext_resource type="PackedScene" uid="uid://g6eienmanry6" path="res://Scenes/Ships/Player/Broadsword.tscn" id="10_dasxs"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
 panorama = ExtResource("1_2nnjr")
@@ -66,33 +68,8 @@ transform = Transform3D(-0.826904, 1.15643e-08, 0.562343, 0.49261, 0.482319, 0.7
 script = ExtResource("2_20fsw")
 team = "blue team"
 
-[node name="FighterNPC" parent="BlueTeam" instance=ExtResource("2_wndl6")]
-transform = Transform3D(0.67309, 2.90552e-09, -0.739561, 4.37114e-08, 1, 4.37114e-08, 0.739561, -6.17489e-08, 0.67309, -15.7664, 0, 62.1026)
-
-[node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC" instance=ExtResource("4_owcqu")]
-
-[node name="FighterNPC2" parent="BlueTeam" instance=ExtResource("2_wndl6")]
-transform = Transform3D(0.519671, -0.729458, 0.444783, -0.554188, -0.684025, -0.474326, 0.650244, 4.78559e-09, -0.759726, -50.8924, 0, 0)
-
-[node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC2" instance=ExtResource("4_owcqu")]
-
-[node name="FighterNPC3" parent="BlueTeam" instance=ExtResource("2_wndl6")]
-transform = Transform3D(-0.987167, 3.61701e-08, 0.159692, -0.139389, 0.487966, -0.861661, -0.0779242, -0.872862, -0.481704, 0, -18.5198, -23.3972)
-
-[node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC3" instance=ExtResource("4_owcqu")]
-
-[node name="FighterNPC4" parent="BlueTeam" instance=ExtResource("2_wndl6")]
-transform = Transform3D(-0.622027, 0.533939, -0.572705, 0.392804, 0.845523, 0.361658, 0.677338, 2.54983e-09, -0.735672, 22.3963, -2.21217, 0.00296021)
-
-[node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC4" instance=ExtResource("4_owcqu")]
-
-[node name="FighterNPC5" parent="BlueTeam" instance=ExtResource("2_wndl6")]
-transform = Transform3D(-0.983096, 3.49692e-08, 0.183094, 4.37114e-08, 1, 4.37114e-08, -0.183094, 5.09758e-08, -0.983096, 33.3498, 0, 26.4809)
-
-[node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC5" instance=ExtResource("4_owcqu")]
-
-[node name="Corvette" parent="BlueTeam" instance=ExtResource("3_8iyj5")]
-
-[node name="NPCFighterController" parent="BlueTeam/Corvette" instance=ExtResource("4_owcqu")]
-
 [node name="Hornet" parent="BlueTeam" instance=ExtResource("7_02qsi")]
+
+[node name="Broadsword" parent="BlueTeam" instance=ExtResource("10_dasxs")]
+
+[node name="Rapier" parent="BlueTeam" instance=ExtResource("8_0ecm7")]

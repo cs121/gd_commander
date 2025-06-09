@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6m3fat2j2t5n"]
+
+[ext_resource type="Script" uid="uid://caivatbx5njue" path="res://Scripts/Helpers/hud.gd" id="1_t0qyx"]
+
+[node name="Hud" type="Node2D"]
+
+[node name="Hud" type="CanvasLayer" parent="."]
+script = ExtResource("1_t0qyx")
+
+[node name="Speed" type="Label" parent="Hud"]
+offset_top = 600.0
+offset_right = 180.0
+offset_bottom = 650.0
+
+[node name="Afterburner" type="ColorRect" parent="Hud"]
+anchors_preset = -1
+anchor_right = 10.0
+offset_left = 200.0
+offset_top = 600.0
+offset_right = -11270.0
+offset_bottom = 650.0
+
+[node name="Shield" type="TextureProgressBar" parent="Hud"]
+offset_left = 921.0
+offset_top = 601.0
+offset_right = 1140.0
+offset_bottom = 641.0
+
+[node name="Health" type="TextureProgressBar" parent="Hud"]
+offset_left = 916.0
+offset_top = 540.0
+offset_right = 1135.0
+offset_bottom = 580.0
+
+[node name="TargetBox" type="VBoxContainer" parent="Hud"]
+offset_left = 419.0
+offset_top = 13.0
+offset_right = 709.0
+offset_bottom = 103.0
+
+[node name="TargetName" type="Label" parent="Hud/TargetBox"]
+layout_mode = 2
+
+[node name="TargetDistance" type="Label" parent="Hud/TargetBox"]
+layout_mode = 2

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://sm0hhhd7xtd4"]
+
+[ext_resource type="ArrayMesh" uid="uid://dxtbtg8deu8xr" path="res://Assets/Ships/Voxel/InfraredFurtive.obj" id="1_dnkpe"]
+
+[node name="Rapier" type="Node3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="InfraredFurtive" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = ExtResource("1_dnkpe")

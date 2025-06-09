@@ -1,12 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://conb7kdfab3ks"]
+[gd_scene load_steps=17 format=3 uid="uid://conb7kdfab3ks"]
 
-[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="1_7r32l"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/baseship.tscn" id="1_7r32l"]
 [ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="3_piomx"]
+[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Weapons/Guns/gun.tscn" id="4_g05kq"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="4_tjq8h"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="5_oyaoq"]
+[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Weapons/Projectiles/bullet_ray_basic.tscn" id="5_vcln5"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/vfx/Effects/engine_audio_visuals.tscn" id="6_jay2w"]
+[ext_resource type="PackedScene" uid="uid://dup57p4ygajr1" path="res://Scenes/Weapons/Guns/laser_shotgun.tscn" id="6_svvpg"]
+[ext_resource type="PackedScene" uid="uid://cbyb5ysj3umaf" path="res://Scenes/Weapons/Projectiles/shotgun_pellet.tscn" id="7_cr63k"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_j06gp"]
 [ext_resource type="Texture2D" uid="uid://jrdgjl0pb5x7" path="res://Assets/Images/cockpits/Privateer_-_Cockpit_-_Centurion_-_Off.png" id="8_2bwh5"]
+[ext_resource type="PackedScene" uid="uid://b6m3fat2j2t5n" path="res://Scripts/Helpers/HUD.tscn" id="8_yvihc"]
+[ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/Hornet.tscn" id="13_cr63k"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
+radius = 2.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_se4th"]
 resource_local_to_scene = true
@@ -21,13 +30,32 @@ material = SubResource("ShaderMaterial_se4th")
 
 [node name="Hornet" instance=ExtResource("1_7r32l")]
 ship_name = "Hornet"
-max_speed = 300.0
+max_speed = 70.0
+acceleration = 0.0
+turn_rate = 0.0
+health_max = 25
+weapon_config = ""
+death_animation_duration_min = 1.5
+death_animation_duration_max = 4.5
 
-[node name="MissileLockGroup" parent="." index="8"]
+[node name="CollisionShape3D" parent="." index="2"]
+shape = SubResource("SphereShape3D_ydoww")
+
+[node name="DebugLabel" parent="." index="4"]
+visible = true
+
+[node name="MissileLockGroup" parent="." index="7"]
 npc_missile_lock = false
 
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_24wxq")
+
+[node name="Gun" parent="WeaponHandler" index="0"]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -2.5, -1.03824, -5.2)
+bullet_speed = 400.0
+bullet_timeout = 1.0
+fire_rate = 4.0
+spread_deg = 0.5
 
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun" index="1"]
 self_modulate = Color(1, 1, 1, 0.607843)
@@ -35,18 +63,52 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_tjq8h")
 
-[node name="CameraGroup" parent="." index="12" instance=ExtResource("5_oyaoq")]
+[node name="Gun2" parent="WeaponHandler" index="1" instance=ExtResource("4_g05kq")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 2.5, -1.03824, -5.2)
+bullet = ExtResource("5_vcln5")
+bullet_speed = 400.0
+bullet_timeout = 1.0
+fire_rate = 4.0
+spread_deg = 0.5
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun2" index="1"]
+self_modulate = Color(1, 1, 1, 0.607843)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_tjq8h")
+
+[node name="LaserShotgun" parent="WeaponHandler" index="2" instance=ExtResource("6_svvpg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, -3)
+bullet = ExtResource("7_cr63k")
+bullet_speed = 100.0
+fire_rate = 4.0
+spread_deg = 1.0
+
+[node name="LaserShotgun2" parent="WeaponHandler" index="3" instance=ExtResource("6_svvpg")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, -3)
+bullet = ExtResource("7_cr63k")
+bullet_speed = 100.0
+fire_rate = 4.0
+spread_deg = 1.0
+
+[node name="CameraGroup" parent="." index="11" instance=ExtResource("5_oyaoq")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="EngineAudioVisuals" parent="." index="13" instance=ExtResource("6_jay2w")]
+[node name="EngineAudioVisuals" parent="." index="12" instance=ExtResource("6_jay2w")]
 
-[node name="PlayerMovementV4" parent="." index="14" instance=ExtResource("7_j06gp")]
+[node name="PlayerMovementV4" parent="." index="13" instance=ExtResource("7_j06gp")]
 
-[node name="Privateer-Cockpit-Centurion-Off" type="Sprite2D" parent="." index="15"]
+[node name="Privateer-Cockpit-Centurion-Off" type="Sprite2D" parent="." index="14"]
 z_index = 1
 position = Vector2(0, 200)
 scale = Vector2(6, 6)
 texture = ExtResource("8_2bwh5")
 centered = false
+
+[node name="Hud" parent="." index="15" instance=ExtResource("8_yvihc")]
+visible = false
+
+[node name="Hornet" parent="." index="16" instance=ExtResource("13_cr63k")]
 
 [editable path="Shield"]

@@ -15,6 +15,8 @@ var shoot_just_pressed := false
 var brake := false
 var accelerate := false
 var afterburner := false
+var afterburner_just_pressed := false
+var afterburner_just_released := false
 var accelerate_just_pressed := false
 var left_right1 := 0.0 # Left stick
 var left_right2 := 0.0 # Right stick
@@ -53,6 +55,8 @@ func update() -> void:
 	brake = Input.is_action_pressed("brake")
 	accelerate = Input.is_action_pressed("accelerate")
 	afterburner = Input.is_action_pressed("afterburner")
+	afterburner_just_pressed = Input.is_action_just_pressed("afterburner")
+	afterburner_just_released = Input.is_action_just_released("afterburner")
 	accelerate_just_pressed = Input.is_action_just_pressed("accelerate")
 	
 	if use_mouse_and_keyboard:

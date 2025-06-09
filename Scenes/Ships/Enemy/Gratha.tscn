@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/Ships/baseship.gd" id="1_cn6fq"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/Helpers/aim_assist.tscn" id="2_wevbw"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/vfx/Effects/burning_trail.tscn" id="3_jo6xv"]
-[ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="4_ll6nv"]
+[ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/Hornet.tscn" id="4_ll6nv"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/vfx/Effects/contrail.tscn" id="5_34f2j"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/Helpers/health_component.tscn" id="6_a12hc"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/vfx/Effects/hit_feedback.tscn" id="7_feuud"]

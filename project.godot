@@ -191,15 +191,19 @@ pause={
 
 [navigation]
 
-3d/default_cell_size=0.5
-3d/default_cell_height=0.5
+3d/default_cell_size=0.1
+3d/default_cell_height=0.1
+
+[physics]
+
+common/physics_interpolation=true
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-driver/threads/thread_model=2
 textures/lossless_compression/force_png=true
-environment/ssao/quality=0
+environment/ssao/quality=3
 textures/decals/filter=0
+anti_aliasing/quality/use_debanding=true
 occlusion_culling/use_occlusion_culling=true
 mesh_lod/lod_change/threshold_pixels=0.0

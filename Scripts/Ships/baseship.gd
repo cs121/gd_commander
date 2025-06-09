@@ -2,13 +2,12 @@ class_name Ship extends CharacterBody3D
 
 signal destroyed
 
-@export var ship_name: String = "Generic"
-@export var max_speed: float = 200.0
-@export var acceleration: float = 30.0
-@export var turn_rate: float = 2.0
-@export var health_max: int = 100
-@export var shield_max: int = 25
-@export var weapon_config: String = "default"
+@export var ship_name: String
+@export var max_speed: float
+@export var acceleration: float
+@export var turn_rate: float
+@export var health_max: int
+@export var weapon_config: String
 
 # Komponenten-Referenzen
 var aim_assist:AimAssist
@@ -91,6 +90,26 @@ func get_current_gun() -> Gun:
 		return missile_lock.missile_launcher
 	else:
 		return null
+
+func _setup_weapons():
+	if not weapon_handler:
+		return
+
+	for weapon in weapon_handler.get_children():
+		# Optional: auch verschachtelte Strukturen prüfen
+		_setup_weapon_recursive(weapon)
+
+
+func _setup_weapon_recursive(node: Node):
+	if node is Gun or node.get_class() == "MissileLauncher":
+		if aim_assist:
+			node.aim_assist = aim_assist
+		if Global.has("player_team"):  # Beispiel für Team-Logik
+			node.ally_team = Global.player_team
+	elif node.get_child_count() > 0:
+		for child in node.get_children():
+			_setup_weapon_recursive(child)
+
 
 # Wird ausgelöst, wenn das Schiff Schaden erleidet
 func _on_health_component_health_lost() -> void:

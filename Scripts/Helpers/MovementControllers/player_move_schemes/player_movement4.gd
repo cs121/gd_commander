@@ -27,8 +27,9 @@ class_name PlayerMovement4 extends CharacterBodyControlParent
 # "asteroids" controls.
 #     No brakes (EXCEPT WE KEPT THEM IN FOR TESTING PURPOSES)
 
+#@onready var camera_controller := get_parent().get_node_or_null("CameraGroup")
 @onready var camera_controller = get_node("%CameraGroup")
-@onready var first_person_camera = camera_controller.get_node("Body/Head/FirstPersonCamera")
+@onready var first_person_camera = camera_controller.get_node_or_null("Body/Head/FirstPersonCamera")
 
 
 #Strength of movements under standard motion
@@ -39,14 +40,14 @@ var pitch_std_right_stick: float = 0.4
 var yaw_std: float = 1.2               # Doppelt so schnelle Yaw-Bewegung
 
 # Steuerung
-var friction_std: float = 0.8
+var friction_std: float = 0.7
 
 #forward motion
 var impulse_std: float
 var current_impulse: float = 0.0
 
 # Nachbrenner
-var afterburner_speed: float = 280.0
+var afterburner_speed: float = 180.0
 var afterburner_duration: float = 3.0  # Sekunden
 var afterburner_cooldown: float = 5.0  # Sekunden
 var afterburner_active: bool = false
@@ -97,12 +98,16 @@ func move_and_turn(mover, delta: float) -> void:
 	friction = friction_std
 	var is_moving := false  # True, wenn Schub aktiv ist
 
-	# === Nachbrenneraktivierung (nur wenn Afterburner-Taste gedrückt und kein Cooldown) ===
-	_handle_afterburner(delta)
 
+	# === Geschwindigkeitslimitierung ===
+	var speed_limit = afterburner_speed if afterburner_active else impulse_std
+	if mover.velocity.length() > speed_limit:
+		mover.velocity = mover.velocity.normalized() * speed_limit
+		
 	# === Steuerung abhängig von Benutzereingabe ===
-	if im.accelerate:
-		# Normales Beschleunigen
+	if afterburner_active:
+		is_moving = true  # Auch wenn keine Taste gedrückt ist
+	elif im.accelerate:
 		is_moving = true
 		current_impulse = min(current_impulse + acceleration_rate * delta, impulse_std)
 		pitch_modifier = 0.9
@@ -119,14 +124,12 @@ func move_and_turn(mover, delta: float) -> void:
 	else:
 		mover.velocity = mover.velocity.lerp(Vector3.ZERO, friction * delta)
 
-	# === Geschwindigkeitslimitierung ===
-	var speed_limit = afterburner_speed if afterburner_active else impulse_std
-	if mover.velocity.length() > speed_limit:
-		mover.velocity = mover.velocity.normalized() * speed_limit
-
 	# Optional: Bewegung komplett stoppen, wenn sehr langsam
 	if mover.velocity.length() < 0.5:
 		mover.velocity = Vector3.ZERO
+	
+	# === Nachbrenneraktivierung (nur wenn Afterburner-Taste gedrückt und kein Cooldown) ===
+	_handle_afterburner(delta)
 
 	# === Rotation (Steuereingaben mit Verzögerung) ===
 	pitch_input = lerp(pitch_input,
@@ -157,36 +160,40 @@ func _apply_cockpit_shake() -> void:
 		var velocity = Global.player.velocity.length()
 		var speed_ratio = clamp(velocity / impulse_std, 0.0, 1.0)
 		var strength = (speed_ratio - 0.4)  # Werte feinjustieren
-		var shake_offset = Vector3(randf_range(-.5, .5),randf_range(-.5, .5),0) * strength
+		var shake_offset = Vector3(randf_range(-.25, .25),randf_range(-.25, .25),0) * strength
 		first_person_camera.position = shake_offset
 		
-
-
-
-
 func _reset_cockpit_shake() -> void:
 	if first_person_camera:
 		first_person_camera.position = Vector3.ZERO
 
 
 func _handle_afterburner(delta: float) -> void:
-	if im.afterburner and !afterburner_active and afterburner_cooldown_timer <= 0.0:
+	if is_dead:
+		return
+
+	# Start Afterburner
+	if im.afterburner_just_pressed and !afterburner_active and afterburner_cooldown_timer <= 0.0:
 		afterburner_active = true
 		afterburner_timer = afterburner_duration
+		current_impulse = afterburner_speed
 		print("Afterburner aktiviert!")
-	elif afterburner_active and (!im.afterburner or afterburner_timer <= 0.0):
+
+	# Stop Afterburner nach Ablauf der Zeit oder wenn Taste losgelassen
+	if afterburner_active and afterburner_timer <= 0.0:
 		afterburner_active = false
 		afterburner_cooldown_timer = afterburner_cooldown
+		current_impulse = min(current_impulse, impulse_std)
 		print("Afterburner deaktiviert!")
 
-	if afterburner_active:
-		afterburner_timer -= delta
-
-	# Cooldown immer runterzählen, egal ob aktiv oder nicht
-	if afterburner_cooldown_timer > 0.0 and not afterburner_active:
+	# Cooldown läuft immer
+	if afterburner_cooldown_timer > 0.0 and !afterburner_active:
 		afterburner_cooldown_timer = max(0.0, afterburner_cooldown_timer - delta)
 
-func handle_engine_audio(mover) -> void:
+
+func handle_engine_audio(mover) -> void:	
+	if is_dead:
+		return
 	if !mover.engineAV:
 		return
 	# NOTE! These transition time numbers

@@ -20,7 +20,7 @@ var reticle: TextureRect
 var ally_team: String
 var data: ShootData
 var range_sqd: float
-
+var aim_assist: AimAssist = null
 
 func _ready():
 	if has_node("FiringRateTimer"):

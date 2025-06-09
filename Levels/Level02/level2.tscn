@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/Helpers/team_setup.gd" id="1_nau7t"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/Enemy/todo/corvette.tscn" id="3_5rasv"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Helpers/shield.tscn" id="3_6nm7s"]
-[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="4_s6g67"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/baseship.tscn" id="4_s6g67"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/Enemy/todo/bomber.tscn" id="5_1d1v4"]
 [ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="5_7pty0"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Weapons/Guns/laser_gun.tscn" id="5_8sixk"]

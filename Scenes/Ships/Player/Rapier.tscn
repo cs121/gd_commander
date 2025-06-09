@@ -1,11 +1,27 @@
-[gd_scene load_steps=9 format=3 uid="uid://ca7yjl8rk6wrw"]
+[gd_scene load_steps=23 format=3 uid="uid://b1h3865cyeokb"]
 
-[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/Enemy/Dralthi.tscn" id="1_mhmnm"]
+[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/Ships/baseship.gd" id="1_eqfq4"]
+[ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/Helpers/aim_assist.tscn" id="2_teej3"]
+[ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/vfx/Effects/burning_trail.tscn" id="3_83ljn"]
 [ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="3_ayuih"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="4_3djtt"]
+[ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/vfx/Effects/contrail.tscn" id="4_orlhe"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/Helpers/health_component.tscn" id="5_aqry5"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Helpers/camera_group.tscn" id="5_j4hka"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/vfx/Effects/engine_audio_visuals.tscn" id="6_8er56"]
+[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/vfx/Effects/hit_feedback.tscn" id="6_g8qhh"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_joiw1"]
+[ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/Helpers/missile_lock_group.tscn" id="7_v4y6h"]
+[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Weapons/Guns/gun.tscn" id="8_ry4ha"]
+[ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Weapons/Projectiles/missile.tscn" id="9_q75sk"]
+[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Helpers/shield.tscn" id="10_ag6nb"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/Helpers/target_reticles.tscn" id="12_xwe1b"]
+[ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/Helpers/weapon_handler.tscn" id="13_kkvj5"]
+[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Weapons/Projectiles/bullet_ray_basic.tscn" id="14_sd6nn"]
+[ext_resource type="PackedScene" uid="uid://sm0hhhd7xtd4" path="res://Assets/Ships/Rapier.tscn" id="19_r7nj3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
+radius = 2.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_se4th"]
 resource_local_to_scene = true
@@ -18,25 +34,82 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_se4th")
 
-[node name="Rapier" instance=ExtResource("1_mhmnm")]
+[node name="Rapier" type="CharacterBody3D" groups=["damageable", "team member"]]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_eqfq4")
 ship_name = "Rapier"
+max_speed = 60.0
+health_max = 50
+deathExplosion = 9
+finalExplosion = 8
 
-[node name="MissileLockGroup" parent="." index="8"]
-npc_missile_lock = false
+[node name="AimAssist" parent="." instance=ExtResource("2_teej3")]
+angle_assist_limit = 10.0
+
+[node name="BurningTrail" parent="." instance=ExtResource("3_83ljn")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_ydoww")
+
+[node name="Contrail" parent="." instance=ExtResource("4_orlhe")]
+
+[node name="DebugLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+billboard = 1
+fixed_size = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_aqry5")]
+
+[node name="HitFeedback" parent="." instance=ExtResource("6_g8qhh")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MissileLockGroup" parent="." instance=ExtResource("7_v4y6h")]
+missile_range = 1000.0
+
+[node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("8_ry4ha")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bullet = ExtResource("9_q75sk")
+damage = 10.0
+bullet_speed = 150.0
+bullet_timeout = 5.0
+fire_rate = 0.033
+
+[node name="Shield" parent="." instance=ExtResource("10_ag6nb")]
+transform = Transform3D(20, 1.67038e-21, 3.38813e-21, 0, 20, 0, 3.38813e-21, 0, 20, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_24wxq")
 
-[node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun" index="1"]
+[node name="TargetReticles" parent="." instance=ExtResource("12_xwe1b")]
+
+[node name="WeaponHandler" parent="." instance=ExtResource("13_kkvj5")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Gun" parent="WeaponHandler" instance=ExtResource("8_ry4ha")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
+bullet = ExtResource("14_sd6nn")
+bullet_speed = 600.0
+fire_rate = 8.0
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun"]
 self_modulate = Color(1, 1, 1, 0.607843)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_3djtt")
 
-[node name="CameraGroup" parent="." index="12" instance=ExtResource("5_j4hka")]
+[node name="CameraGroup" parent="." instance=ExtResource("5_j4hka")]
+unique_name_in_owner = true
 
-[node name="EngineAudioVisuals" parent="." index="13" instance=ExtResource("6_8er56")]
+[node name="EngineAudioVisuals" parent="." instance=ExtResource("6_8er56")]
 
-[node name="PlayerMovementV4" parent="." index="14" instance=ExtResource("7_joiw1")]
+[node name="PlayerMovementV4" parent="." instance=ExtResource("7_joiw1")]
+
+[node name="Rapier" parent="." instance=ExtResource("19_r7nj3")]
 
 [editable path="Shield"]

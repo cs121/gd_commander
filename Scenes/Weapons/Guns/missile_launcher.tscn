@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlmaiaybypen3"]
+
+[ext_resource type="Script" uid="uid://b5tyhsu8us755" path="res://Scripts/Weapons/Guns/missile_launcher.gd" id="1_ne3k2"]
+
+[node name="Missile_Launcher" type="Node3D"]
+script = ExtResource("1_ne3k2")
+
+[node name="FiringRateTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

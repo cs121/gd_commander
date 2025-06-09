@@ -1,16 +1,3 @@
-# Godot
-.import/
-.export/
-.export_templates/
-*.import
-*.tmp
-*.godot/tmp_*
-*.log
-*.cfg
-*.mono/
-*.tmp
-*.cache
-
-# Betriebssystem-spezifisch
-.DS_Store
-Thumbs.db
+# Godot 4+ specific ignores
+.godot/
+/android/

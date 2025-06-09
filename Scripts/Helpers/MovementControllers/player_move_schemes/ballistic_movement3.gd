@@ -60,15 +60,6 @@ func move_and_turn(mover, delta:float) -> void:
 		pitch_modifier = 0.9
 		roll_modifier = 0.9
 		yaw_modifier = 0.9
-	#Drift
-	elif im.drift:
-		# I like that drift snaps straight to zero impulse and friction
-		impulse = 0.0
-		friction = 0.0
-		# Sharper turning while drifting
-		pitch_modifier = 1.3
-		roll_modifier = 1.3
-		yaw_modifier = 1.3
 	else:
 		#impulse = lerp(impulse, impulse_std, impulse_lerp*delta)
 		impulse = impulse_std
@@ -100,8 +91,6 @@ func handle_engine_audio(mover) -> void:
 		mover.engineAV.shift2brake(0.0)
 	elif im.accelerate:
 		mover.engineAV.shift2afterburners(4.0)
-	elif im.drift:
-		mover.engineAV.shift2drift(1.0)
 	else:
 		mover.engineAV.shift2default(2.0)
 

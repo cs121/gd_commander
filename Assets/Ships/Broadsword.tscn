@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://m1a7lirn25xv"]
+
+[ext_resource type="ArrayMesh" uid="uid://dkckt675pjn2a" path="res://Assets/Ships/Voxel/StarMarineTrooper.obj" id="1_uum8e"]
+
+[node name="Broadsword" type="Node3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="StarMarineTrooper" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = ExtResource("1_uum8e")

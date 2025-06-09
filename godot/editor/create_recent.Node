@@ -1,9 +1,13 @@
+CharacterBody3D
+Label
+VBoxContainer
+TextureProgressBar
+ColorRect
+CanvasLayer
 Button
 FileDialog
 LineEdit
 HBoxContainer
-Label
-VBoxContainer
 Node3D
 AudioStreamPlayer
 Timer

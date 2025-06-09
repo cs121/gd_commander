@@ -14,6 +14,9 @@ deathExplosion = 8
 sparks = 0
 shieldSparks = 0
 
+[node name="Timer" parent="." index="0"]
+wait_time = 0.5
+
 [node name="GrayTorpedo" parent="." index="2" instance=ExtResource("4_4eh70")]
 
 [node name="PhysicsSeekController" parent="." index="3" instance=ExtResource("5_m3n6r")]
@@ -26,4 +29,3 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("SphereShape3D_7sobq")
 
 [node name="HealthComponent" parent="." index="5" instance=ExtResource("7_4ccg1")]
-max_health = 1
