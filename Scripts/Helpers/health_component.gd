@@ -6,8 +6,7 @@ class_name HealthComponent
 signal health_lost
 signal died
 
-@export var max_health := 50
-
+@export var max_health := 500
 
 # Only signal died once. If for some reason,
 # later on a component gets resurrected, then

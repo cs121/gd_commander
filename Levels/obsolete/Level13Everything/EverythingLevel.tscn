@@ -1,0 +1,106 @@
+[gd_scene load_steps=17 format=3 uid="uid://k6inhwfk2gp"]
+
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_lqyyp"]
+[ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_wr6oo"]
+[ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/obsolete/Level13Everything/star.tscn" id="2_2lnk5"]
+[ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
+[ext_resource type="MeshLibrary" uid="uid://onqmfkbeu0js" path="res://Assets/Asteroids/asteroids.tres" id="4_u7bmr"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/Helpers/team_setup.gd" id="5_0jpk3"]
+[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/Player/Hornet.tscn" id="6_xbcqs"]
+[ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/Enemy/todo/bomber.tscn" id="7_m10fo"]
+[ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/Enemy/todo/destroyer.tscn" id="8_5shl4"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="8_isq32"]
+[ext_resource type="PackedScene" uid="uid://bqvcfo7v6o6ip" path="res://Scenes/Ships/Enemy/todo/beam_destroyer.tscn" id="9_kc2e1"]
+[ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Scenes/Ships/Enemy/todo/frigate.tscn" id="10_d6xr2"]
+[ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Scenes/Ships/Enemy/todo/carrier.tscn" id="11_gd4i7"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_er3bs"]
+panorama = ExtResource("1_wr6oo")
+
+[sub_resource type="Sky" id="Sky_8we3c"]
+sky_material = SubResource("PanoramaSkyMaterial_er3bs")
+
+[sub_resource type="Environment" id="Environment_x4e1d"]
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_8we3c")
+glow_enabled = true
+glow_bloom = 0.2
+glow_blend_mode = 1
+adjustment_enabled = true
+adjustment_brightness = 1.4
+adjustment_contrast = 1.1
+adjustment_saturation = 1.3
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_lqyyp")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x4e1d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.777146, 0.267952, -0.569426, 0, 0.904827, 0.42578, 0.62932, -0.330893, 0.703183, 0, 0, 0)
+light_color = Color(1, 0.643137, 1, 1)
+light_angular_distance = 2.0
+shadow_enabled = true
+shadow_opacity = 0.9
+shadow_blur = 0.4
+directional_shadow_mode = 0
+directional_shadow_max_distance = 1000.0
+
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 7)
+mesh_library = ExtResource("4_u7bmr")
+cell_size = Vector3(32, 32, 32)
+cell_scale = 40.0
+data = {
+"cells": PackedInt32Array(65524, 65534, 262147, 65530, 65529, 1310723, 458749, 65535, 65539, -327686, 65529, 65539, -327683, 7, 393220, -720886, 17, 393220, 327676, 3, 1376260, 131081, 65527, 393216, -196587, 9, 917505, -196588, 9, 917505, -131059, 15, 983041)
+}
+metadata/_editor_floor_ = Vector3(0, -2, 0)
+
+[node name="GridMap2" type="GridMap" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -3, 7)
+mesh_library = ExtResource("4_u7bmr")
+cell_size = Vector3(45, 45, 45)
+cell_scale = 55.0
+data = {
+"cells": PackedInt32Array(-196617, 65533, 65537, -65537, 1, 589828, 65530, 3, 589828, -393233, 65535, 589827, 65531, 65535, 589826, -327687, 65533, 65540)
+}
+metadata/_editor_floor_ = Vector3(0, -6, 0)
+
+[node name="Star" parent="." instance=ExtResource("2_2lnk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8000, 3000, 10000)
+
+[node name="BlueTeam" type="Node3D" parent="."]
+script = ExtResource("5_0jpk3")
+team = "blue team"
+
+[node name="SpaceStation" parent="BlueTeam" instance=ExtResource("3_eggcn")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
+
+[node name="Fighter" parent="BlueTeam" instance=ExtResource("6_xbcqs")]
+finalExplosion = 0
+
+[node name="RedTeam" type="Node3D" parent="."]
+script = ExtResource("5_0jpk3")
+
+[node name="Bomber" parent="RedTeam" instance=ExtResource("7_m10fo")]
+transform = Transform3D(0.102862, 0, -0.994696, 0, 1, 0, 0.994696, 0, 0.102862, 0, 0, 77.4889)
+finalExplosion = 0
+
+[node name="NPCFighterController" parent="RedTeam/Bomber" instance=ExtResource("8_isq32")]
+target_capital_ships = true
+too_far = 800.0
+too_close = 300.0
+
+[node name="Destroyer" parent="RedTeam" instance=ExtResource("8_5shl4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 126.993)
+
+[node name="BeamDestroyer" parent="RedTeam" instance=ExtResource("9_kc2e1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 210.075)
+
+[node name="Frigate" parent="RedTeam" instance=ExtResource("10_d6xr2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 347.175)
+
+[node name="Carrier" parent="RedTeam" instance=ExtResource("11_gd4i7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 729.95)

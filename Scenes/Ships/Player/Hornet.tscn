@@ -29,14 +29,9 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_se4th")
 
 [node name="Hornet" instance=ExtResource("1_7r32l")]
-ship_name = "Hornet"
-max_speed = 70.0
-acceleration = 0.0
-turn_rate = 0.0
-health_max = 25
-weapon_config = ""
 death_animation_duration_min = 1.5
 death_animation_duration_max = 4.5
+max_speed = 99
 
 [node name="CollisionShape3D" parent="." index="2"]
 shape = SubResource("SphereShape3D_ydoww")
@@ -98,6 +93,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 [node name="EngineAudioVisuals" parent="." index="12" instance=ExtResource("6_jay2w")]
 
 [node name="PlayerMovementV4" parent="." index="13" instance=ExtResource("7_j06gp")]
+friction_std = 0.5
+afterburner_speed = 300.0
+afterburner_duration = 5.0
+afterburner_cooldown = 20.0
 
 [node name="Privateer-Cockpit-Centurion-Off" type="Sprite2D" parent="." index="14"]
 z_index = 1

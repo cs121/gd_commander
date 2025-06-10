@@ -22,14 +22,9 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_se4th")
 
 [node name="Broadsword" instance=ExtResource("1_x3gcm")]
-ship_name = "Broadsword"
-max_speed = 50.0
-acceleration = 0.0
-turn_rate = 0.0
-health_max = 50
-weapon_config = ""
 death_animation_duration_min = 1.5
 death_animation_duration_max = 4.5
+max_speed = 99
 
 [node name="CollisionShape3D" parent="." index="2"]
 shape = SubResource("SphereShape3D_ydoww")

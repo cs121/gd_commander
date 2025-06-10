@@ -1,0 +1,36 @@
+{
+  "player_spawn": {
+	"position": [0, 5, -20],
+	"rotation": [0, 0, 0]
+  },
+  "enemies": [
+	{
+	  "type": "Dralthi",
+	  "position": [30, 0, 60],
+	  "rotation": [0, 180, 0],
+	  "formation": "v_shape",
+	  "behavior": "patrol"
+	},
+	{
+	  "type": "Dralthi",
+	  "position": [-25, 0, 70],
+	  "rotation": [0, 180, 0],
+	  "formation": "v_shape",
+	  "behavior": "patrol"
+	},
+	{
+	  "type": "Salthi",
+	  "position": [0, 10, 80],
+	  "rotation": [0, 180, 0],
+	  "formation": "wingman",
+	  "behavior": "aggressive"
+	},
+	{
+	  "type": "Gratha",
+	  "position": [-20, 5, 90],
+	  "rotation": [0, 160, 0],
+	  "formation": "solo",
+	  "behavior": "guard"
+	}
+  ]
+}

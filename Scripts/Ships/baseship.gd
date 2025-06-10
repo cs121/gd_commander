@@ -2,13 +2,6 @@ class_name Ship extends CharacterBody3D
 
 signal destroyed
 
-@export var ship_name: String
-@export var max_speed: float
-@export var acceleration: float
-@export var turn_rate: float
-@export var health_max: int
-@export var weapon_config: String
-
 # Komponenten-Referenzen
 var aim_assist:AimAssist
 var burning_trail:BurningTrail # Visueller Effekt für Schäden
@@ -28,7 +21,7 @@ var death_animation_timer:Timer
 # Dauer der Todesszene (visuell)
 @export var death_animation_duration_min:float = 1.5
 @export var death_animation_duration_max:float = 4.5
-
+@export var max_speed = 99
 @onready var audio_manager = get_node_or_null("/root/AudioManager")
 
 # Kollisionsbezogene Eigenschaften

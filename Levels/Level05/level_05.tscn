@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://6qsftwvn1vr"]
+[gd_scene load_steps=11 format=3 uid="uid://6qsftwvn1vr"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_02qsi"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/Enemy/todo/corvette.tscn" id="3_8iyj5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="4_owcqu"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/Player/Hornet.tscn" id="7_02qsi"]
-[ext_resource type="PackedScene" uid="uid://b1h3865cyeokb" path="res://Scenes/Ships/Player/Rapier.tscn" id="8_0ecm7"]
-[ext_resource type="PackedScene" uid="uid://g6eienmanry6" path="res://Scenes/Ships/Player/Broadsword.tscn" id="10_dasxs"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
 panorama = ExtResource("1_2nnjr")
@@ -37,26 +35,41 @@ script = ExtResource("2_20fsw")
 
 [node name="FighterNPC" parent="RedTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(1, -4.37114e-08, 0, 3.72442e-08, 0.852047, 0.523466, -2.28814e-08, -0.523466, 0.852047, -14.921, 0, 0)
+death_animation_duration_min = 1.5
+death_animation_duration_max = 4.5
+max_speed = 99
 
 [node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC" instance=ExtResource("4_owcqu")]
 
 [node name="FighterNPC2" parent="RedTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -5.56907, 0, 18.7087)
+death_animation_duration_min = 1.5
+death_animation_duration_max = 4.5
+max_speed = 99
 
 [node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC2" instance=ExtResource("4_owcqu")]
 
 [node name="FighterNPC3" parent="RedTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 11.6173, 4.56897, 32.26)
+death_animation_duration_min = 1.5
+death_animation_duration_max = 4.5
+max_speed = 99
 
 [node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC3" instance=ExtResource("4_owcqu")]
 
 [node name="FighterNPC4" parent="RedTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(0.00529216, 0.812389, 0.583092, -0.00737289, 0.583116, -0.812356, -0.999959, 4.33129e-08, 0.00907559, 8.72978, 0, 9.72695)
+death_animation_duration_min = 1.5
+death_animation_duration_max = 4.5
+max_speed = 99
 
 [node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC4" instance=ExtResource("4_owcqu")]
 
 [node name="FighterNPC5" parent="RedTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(-0.826904, 1.15643e-08, 0.562343, 0.49261, 0.482319, 0.724364, -0.271229, 0.875995, -0.398832, 0, 8.39291, -16.0877)
+death_animation_duration_min = 1.5
+death_animation_duration_max = 4.5
+max_speed = 99
 
 [node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC5" instance=ExtResource("4_owcqu")]
 
@@ -69,7 +82,4 @@ script = ExtResource("2_20fsw")
 team = "blue team"
 
 [node name="Hornet" parent="BlueTeam" instance=ExtResource("7_02qsi")]
-
-[node name="Broadsword" parent="BlueTeam" instance=ExtResource("10_dasxs")]
-
-[node name="Rapier" parent="BlueTeam" instance=ExtResource("8_0ecm7")]
+max_speed = 99

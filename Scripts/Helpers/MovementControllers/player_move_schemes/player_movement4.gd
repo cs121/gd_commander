@@ -32,38 +32,39 @@ class_name PlayerMovement4 extends CharacterBodyControlParent
 @onready var first_person_camera = camera_controller.get_node_or_null("Body/Head/FirstPersonCamera")
 
 
+
 #Strength of movements under standard motion
-var pitch_std: float = 1.8
-var roll_std_left_stick: float = 1.2  # Doppelt so schnell Rollen bei Links/Rechts
-var roll_std_right_stick: float = 2.0
-var pitch_std_right_stick: float = 0.4
-var yaw_std: float = 1.2               # Doppelt so schnelle Yaw-Bewegung
+@export var pitch_std: float = 1.8
+@export var roll_std_left_stick: float = 1.2  # Doppelt so schnell Rollen bei Links/Rechts
+@export var roll_std_right_stick: float = 2.0
+@export var pitch_std_right_stick: float = 0.4
+@export var yaw_std: float = 1.2               # Doppelt so schnelle Yaw-Bewegung
 
 # Steuerung
-var friction_std: float = 0.7
+@export var friction_std: float = 0.7
 
 #forward motion
-var impulse_std: float
+@export var impulse_std: float = 70.0
 var current_impulse: float = 0.0
 
 # Nachbrenner
-var afterburner_speed: float = 180.0
-var afterburner_duration: float = 3.0  # Sekunden
-var afterburner_cooldown: float = 5.0  # Sekunden
+@export var afterburner_speed: float
+@export var afterburner_duration: float # Sekunden
+@export var afterburner_cooldown: float # Sekunden
 var afterburner_active: bool = false
 var afterburner_timer: float = 0.0
-var afterburner_cooldown_timer: float = 15.0
+var afterburner_cooldown_timer: float = 0.0
 
 # Can't accelerate forever. These variables control how
 # long ship can accelerate and how long it takes for the
 # acceleration bar to refill.
 
 # will be added to accel_available
-var accel_regen_rate:float = 1.0 #Used to be 1.0, but I didn't like the "feature"
-var accel_min:float = 1.5 # Can't accelerate if accel_available is less than accel_min
-var is_accelerating:bool
-var acceleration_rate: float = 5.0  # Wie schnell die Geschwindigkeit steigt (units/s²)
-var deceleration_rate: float = 10.0  # Wie schnell die Geschwindigkeit sinkt wenn kein Schub
+#var accel_regen_rate:float = 1.0 #Used to be 1.0, but I didn't like the "feature"
+#var accel_min:float = 1.5 # Can't accelerate if accel_available is less than accel_min
+#var is_accelerating:bool
+@export var acceleration_rate: float = 15.0  # Wie schnell die Geschwindigkeit steigt (units/s²)
+@export var deceleration_rate: float = 5.0  # Wie schnell die Geschwindigkeit sinkt wenn kein Schub
 
 
 var is_dead := false
@@ -72,11 +73,7 @@ var im : InputManager
 
 
 func _ready() -> void:
-	
-	var ship = get_parent()
-	if ship and ship is Ship:
-		impulse_std = ship.max_speed
-	
+
 	im = Global.input_man
 	# Tell the global script who the player is.
 	# Since this is a player controller, it SHOULD
@@ -172,23 +169,29 @@ func _handle_afterburner(delta: float) -> void:
 	if is_dead:
 		return
 
-	# Start Afterburner
+	# Afterburner starten
 	if im.afterburner_just_pressed and !afterburner_active and afterburner_cooldown_timer <= 0.0:
 		afterburner_active = true
 		afterburner_timer = afterburner_duration
 		current_impulse = afterburner_speed
+		afterburner_cooldown_timer = afterburner_cooldown
 		print("Afterburner aktiviert!")
 
-	# Stop Afterburner nach Ablauf der Zeit oder wenn Taste losgelassen
+	# Afterburner-Timer runterzählen
+	if afterburner_active:
+		afterburner_timer -= delta
+
+	# Afterburner stoppen
 	if afterburner_active and afterburner_timer <= 0.0:
 		afterburner_active = false
 		afterburner_cooldown_timer = afterburner_cooldown
 		current_impulse = min(current_impulse, impulse_std)
 		print("Afterburner deaktiviert!")
 
-	# Cooldown läuft immer
+	# Cooldown runterzählen
 	if afterburner_cooldown_timer > 0.0 and !afterburner_active:
 		afterburner_cooldown_timer = max(0.0, afterburner_cooldown_timer - delta)
+
 
 
 func handle_engine_audio(mover) -> void:	
@@ -201,7 +204,7 @@ func handle_engine_audio(mover) -> void:
 	if im.brake:
 		mover.engineAV.shift2brake(0.0)
 	elif im.accelerate:
-		mover.engineAV.shift2afterburners(2.0)
+		mover.engineAV.shift2afterburners(1.0)
 	elif afterburner_active:
 		mover.engineAV.shift2afterburners(4.0)
 	else:

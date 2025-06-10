@@ -11,26 +11,29 @@ script = ExtResource("1_t0qyx")
 offset_top = 600.0
 offset_right = 180.0
 offset_bottom = 650.0
+rotation = 0.00626445
+clip_text = true
 
 [node name="Afterburner" type="ColorRect" parent="Hud"]
 anchors_preset = -1
-anchor_right = 10.0
-offset_left = 200.0
 offset_top = 600.0
-offset_right = -11270.0
+offset_right = 50.0
 offset_bottom = 650.0
+rotation = 0.00626445
 
 [node name="Shield" type="TextureProgressBar" parent="Hud"]
 offset_left = 921.0
 offset_top = 601.0
 offset_right = 1140.0
 offset_bottom = 641.0
+rounded = true
 
 [node name="Health" type="TextureProgressBar" parent="Hud"]
 offset_left = 916.0
 offset_top = 540.0
 offset_right = 1135.0
 offset_bottom = 580.0
+rounded = true
 
 [node name="TargetBox" type="VBoxContainer" parent="Hud"]
 offset_left = 419.0
