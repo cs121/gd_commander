@@ -24,6 +24,14 @@ var death_animation_timer:Timer
 @export var max_speed = 99
 @onready var audio_manager = get_node_or_null("/root/AudioManager")
 
+@export var max_energy: float = 100.0
+var energy: float = max_energy
+@export var energy_recharge_rate: float = 10.0 # Energie pro Sekunde
+@export var energy_cost_per_shot: float = 1.0
+var energy_cooldown: float = 0.0
+const energy_cooldown_duration: float = 2.0
+
+
 # Kollisionsbezogene Eigenschaften
 var hit_feedback:HitFeedback
 var damage_exception:Ship  # Verhindert Friendly Fire
@@ -70,6 +78,18 @@ func _physics_process(delta):
 		controller.shoot(self, delta)             # Waffe abfeuern
 		controller.misc_actions(self)             # Sonstige Aktionen (z. B. Waffenwechsel)
 
+	# Energie langsam aufladen
+	# Energie-Cooldown herunterzählen
+	if energy_cooldown > 0.0:
+		energy_cooldown -= delta
+		if energy_cooldown <= 0.0:
+			energy_cooldown = 0.0  # sicherstellen, dass sie nicht negativ wird
+
+# Energie aufladen nur wenn kein Cooldown
+	if energy < max_energy and energy_cooldown <= 0.0:
+		energy += energy_recharge_rate * delta
+		energy = min(energy, max_energy)
+
 	# Optional: Engine-Sound-Update bei Bewegung (z.B. Schub)
 	if audio_manager and engineAV:
 		var speed_factor = velocity.length() / engineAV.max_speed
@@ -103,6 +123,19 @@ func _setup_weapon_recursive(node: Node):
 		for child in node.get_children():
 			_setup_weapon_recursive(child)
 
+func can_shoot() -> bool:
+	# Während Cooldown darf nicht geschossen werden
+	if energy_cooldown > 0.0:
+		return false
+	return energy >= energy_cost_per_shot
+
+
+func apply_energy_cost():
+	energy -= energy_cost_per_shot
+	energy = max(0.0, energy)
+	
+	if energy <= 0.0:
+		energy_cooldown = energy_cooldown_duration
 
 # Wird ausgelöst, wenn das Schiff Schaden erleidet
 func _on_health_component_health_lost() -> void:

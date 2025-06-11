@@ -197,7 +197,7 @@ func start_near_miss_audio() -> void:
 	# If it doesn't exist yet, create it
 	if !near_miss_audio:
 		near_miss_audio = AudioStreamPlayer3D.new()
-		var audiostream = load("res://Assets/SoundEffects/whoosh_medium_001.ogg")
+		var audiostream = load("res://Audio/SoundEffects/whoosh2.wav")
 		near_miss_audio.set_stream(audiostream)
 		add_child(near_miss_audio)
 		near_miss_audio.play()
@@ -208,11 +208,9 @@ func stop_near_miss_audio() -> void:
 	if near_miss_audio:
 		near_miss_audio.stop()
 
-
 func _on_timer_timeout() -> void:
 	#print('bullet timed out')
 	queue_free()
-
 
 func _on_health_component_died() -> void:
 	# Explode

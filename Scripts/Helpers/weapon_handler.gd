@@ -50,19 +50,25 @@ func change_weapon() -> void:
 	index = wrapi(index+1, 0, get_child_count())
 	equip(get_child(index))
 
-
 func shoot(shooter: Node3D, target = null) -> void:
 	if !is_instance_valid(target):
 		target = null
-	for child in get_children():
-		if child.has_method("shoot"):
-			child.shoot(shooter, target)
 
+	# Prüfen ob genug Energie vorhanden ist
+	if shooter.has_method("can_shoot") and shooter.can_shoot():
+		var shots_fired := false
+		for child in get_children():
+			if child.has_method("shoot"):
+				child.shoot(shooter, target)
+				shots_fired = true
+		# Energie nur abziehen, wenn mindestens eine Waffe geschossen hat
+		if shots_fired and shooter.has_method("apply_energy_cost"):
+			shooter.apply_energy_cost()
+	
 
 
 func is_automatic() -> bool:
 	return current_weapon.automatic
-
 
 func get_bullet_speed() -> float:
 	return current_weapon.bullet_speed

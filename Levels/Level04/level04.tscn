@@ -63,8 +63,11 @@ script = ExtResource("2_0liob")
 
 [node name="FighterNPC" parent="RedTeam" instance=ExtResource("3_vdt0h")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, 1, -0.999372, -0.0354402, -4.52331e-08, 0.0354402, -0.999372, -4.21348e-08, -26.6024, 0, 16.9037)
+death_animation_duration_min = 1.5
+death_animation_duration_max = 4.5
+max_speed = 99
 
-[node name="DebugLabel" parent="RedTeam/FighterNPC" index="5"]
+[node name="DebugLabel" parent="RedTeam/FighterNPC" index="4"]
 visible = true
 
 [node name="FresnelAura" parent="RedTeam/FighterNPC/Shield" index="0"]
@@ -81,6 +84,9 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -29, 0, -34)
 
 [node name="FighterNPC" parent="BlueTeam" instance=ExtResource("3_vdt0h")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -55.1692, 0, -156.585)
+death_animation_duration_min = 1.5
+death_animation_duration_max = 4.5
+max_speed = 99
 
 [node name="FresnelAura" parent="BlueTeam/FighterNPC/Shield" index="0"]
 mesh = SubResource("SphereMesh_q31v4")

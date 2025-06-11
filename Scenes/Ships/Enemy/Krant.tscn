@@ -36,14 +36,8 @@ collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_37uy1")
-ship_name = null
-acceleration = 50.0
-turn_rate = null
-weapon_config = null
 deathExplosion = 9
 finalExplosion = 8
-death_animation_duration_min = null
-death_animation_duration_max = null
 
 [node name="AimAssist" parent="." instance=ExtResource("2_wqjv7")]
 angle_assist_limit = 10.0
@@ -98,6 +92,7 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
 bullet = ExtResource("15_6h8ox")
 bullet_speed = 600.0
-fire_rate = 8.0
+fire_rate = 4.0
+spread_deg = 0.5
 
 [editable path="Shield"]

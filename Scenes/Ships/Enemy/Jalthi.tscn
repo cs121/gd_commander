@@ -36,15 +36,9 @@ collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_obyyg")
-ship_name = "Jalthi"
-max_speed = 100.0
-acceleration = 50.0
-turn_rate = null
-weapon_config = null
 deathExplosion = 9
 finalExplosion = 8
-death_animation_duration_min = null
-death_animation_duration_max = null
+max_speed = 70
 
 [node name="AimAssist" parent="." instance=ExtResource("2_omnxb")]
 angle_assist_limit = 10.0
@@ -99,6 +93,5 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
 bullet = ExtResource("15_iw03r")
 bullet_speed = 600.0
-fire_rate = 8.0
 
 [editable path="Shield"]

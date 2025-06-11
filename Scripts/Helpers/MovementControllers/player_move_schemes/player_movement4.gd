@@ -142,23 +142,8 @@ func move_and_turn(mover, delta: float) -> void:
 	# === Triebwerksgeräusche verwalten ===
 	handle_engine_audio(mover)
 
-	# === Cockpit-Screenshake bei hoher Geschwindigkeit ===
-	var speed_ratio = mover.velocity.length() / impulse_std
-	if speed_ratio > 0.4:
-		_apply_cockpit_shake()
-	else:
-		first_person_camera.position = Vector3.ZERO
-
 	# === Bewegung und Rotation anwenden ===
 	super.move_and_turn(mover, delta)
-
-func _apply_cockpit_shake() -> void:
-	if first_person_camera and Global.player:
-		var velocity = Global.player.velocity.length()
-		var speed_ratio = clamp(velocity / impulse_std, 0.0, 1.0)
-		var strength = (speed_ratio - 0.4)  # Werte feinjustieren
-		var shake_offset = Vector3(randf_range(-.25, .25),randf_range(-.25, .25),0) * strength
-		first_person_camera.position = shake_offset
 		
 func _reset_cockpit_shake() -> void:
 	if first_person_camera:
@@ -192,8 +177,6 @@ func _handle_afterburner(delta: float) -> void:
 	if afterburner_cooldown_timer > 0.0 and !afterburner_active:
 		afterburner_cooldown_timer = max(0.0, afterburner_cooldown_timer - delta)
 
-
-
 func handle_engine_audio(mover) -> void:	
 	if is_dead:
 		return
@@ -209,7 +192,6 @@ func handle_engine_audio(mover) -> void:
 		mover.engineAV.shift2afterburners(4.0)
 	else:
 		mover.engineAV.shift2default(1.0)
-
 
 # Override parent class function
 func shoot(shooter, delta:float) -> void:
