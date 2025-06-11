@@ -132,6 +132,7 @@ func _ready() -> void:
 # Ship that this scene is a child of ought to be the
 # targeter. This function will be called from
 # physics_process with delta as elapsed time.
+
 func update(targeter:Node3D, delta: float) -> void:
 	# NPCs attempt to start seeking at all times
 	if npc_missile_lock and !seeking:
@@ -311,16 +312,12 @@ func stop_seeking() -> void:
 
 # Fire the missiles!
 func launch(targeter:Node3D) -> void:
-	# Determine if this is a quick launch
-	var is_quick_launch:bool = time_since_lock <= quick_launch_interval
 	# If the is not an npc missile lock then play audio
 	if !npc_missile_lock:
-		if is_quick_launch:
-			quick_launch_audio.play()
-		else:
 			launch_audio.play()
 	# Fire zee missile! (For now, don't let npcs use quick launch)
-	missile_launcher.shoot(targeter, target, is_quick_launch and !npc_missile_lock)
+	missile_launcher.shoot(targeter, target, false)
+
 
 
 func acquire_lock() -> void:

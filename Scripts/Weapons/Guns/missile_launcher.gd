@@ -3,14 +3,14 @@ class_name MissileLauncher
 
 @export var missile_scene: PackedScene
 @export var missile_speed: float = 500.0
-@export var fire_rate: float = 0.5
+@export var fire_rate: float = 0.25
 @export var max_range: float = 3000.0
 @export var muzzle_flash: VisualEffectSetting.VISUAL_EFFECT_TYPE
 @export var animation: AnimationPlayer
 
 @onready var audio_manager = get_node_or_null("/root/AudioManager")
+@onready var firing_rate_timer: Timer = Timer.new()
 
-var firing_rate_timer: Timer
 var ally_team: String
 var current_target: Node3D
 var owner_ship: Node3D
@@ -48,7 +48,7 @@ func fire_missile():
 	if audio_manager:
 		audio_manager.play_3d("missile_fire", global_position)
 
-	firing_rate_timer.start(1.0 / fire_rate)
+	firing_rate_timer.start(fire_rate)
 
 func deactivate():
 	set_process(false)

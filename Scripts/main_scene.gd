@@ -23,14 +23,19 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+var previous_text := ""
+
 func _process(_delta):
-	# Display player velocity
 	if Global.player and is_instance_valid(Global.player):
-		$HUD/Demo.text = "Velocity: %.0f" % Global.player.velocity.length()
-		$HUD/Demo.text += "\nHealth: %.d" % Global.player.health_component.health
-		$HUD/Demo.text += "\nFPS: %d" % Engine.get_frames_per_second()
+		var velocity = Global.player.velocity.length()
+		var health = Global.player.health_component.health
+		var fps = Engine.get_frames_per_second()
 
+		var new_text = "Velocity: %.0f\nHealth: %d\nFPS: %d" % [velocity, health, fps]
 
+		if new_text != previous_text:
+			$HUD/Demo.text = new_text
+			previous_text = new_text
 
 func _input(_event: InputEvent) -> void:
 	# Exit to main menu on exit, or if we're already
@@ -43,11 +48,8 @@ func _input(_event: InputEvent) -> void:
 			print('to main menu')
 			to_main_menu()
 	# "p" to pause the game, but not from the main menu
-	elif Input.is_action_just_pressed('pause') and !menu.visible:
-		$PauseCanvasLayer.visible = true
-		get_tree().paused = true
-
-
+	elif Input.is_action_just_pressed("pause") and not menu.visible:
+			_toggle_pause()
 
 func to_main_menu() -> void:
 	unload_level()
@@ -72,23 +74,31 @@ func load_level(level_name:String) -> void:
 	unload_level()
 	var level_path := "res://Levels/%s.tscn" % level_name
 	var level_resource := load(level_path)
+	
+	if level_resource == null:
+		push_error("Could not load level: %s" % level_path)
+		return
+	
 	if(level_resource):
 		level_instance = level_resource.instantiate()
 		main_3d.add_child(level_instance)
 		menu.visible = false
 		hud.visible = true
 		Global.input_man.refresh()
+		
 	# Set team node references in the global script
 	Global.red_team_group = null
 	Global.blue_team_group = null
 	for c in Global.get_all_children(main_3d):
 		if c is TeamSetup:
-			if c.team == "red team":
-				Global.red_team_group = c
-			elif c.team == "blue team":
-				Global.blue_team_group = c
-			else:
-				printerr('Unrecognized team %s in main_scene.gd load_level' % c.team)
+			match c.team:
+				"red team": Global.red_team_group = c
+				"blue team": Global.blue_team_group = c
+				_: push_warning("Unrecognized team: %s" % c.team)
+
+func _toggle_pause():
+	$PauseCanvasLayer.visible = !$PauseCanvasLayer.visible
+	get_tree().paused = $PauseCanvasLayer.visible
 
 
 func _on_load_1_pressed() -> void:

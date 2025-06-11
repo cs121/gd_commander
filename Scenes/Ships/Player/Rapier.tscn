@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b1h3865cyeokb"]
+[gd_scene load_steps=23 format=3 uid="uid://cwp577b8d0sce"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/Ships/baseship.gd" id="1_eqfq4"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/Helpers/aim_assist.tscn" id="2_teej3"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cwvjmhlcv8ry7"]
+[gd_scene load_steps=15 format=3 uid="uid://cwvjmhlcv8ry7"]
 
 [ext_resource type="Script" uid="uid://baxrmmxjl3l63" path="res://Scripts/Weapons/Guns/laser_gun.gd" id="1_d84oy"]
+[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Weapons/Projectiles/bullet_ray_basic.tscn" id="2_hinwv"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_7m7xi"]
 flip_faces = true
@@ -81,6 +82,7 @@ size = Vector2(0.4, 0.4)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 visible = false
 script = ExtResource("1_d84oy")
+bullet = ExtResource("2_hinwv")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false

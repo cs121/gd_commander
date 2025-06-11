@@ -94,9 +94,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
 [node name="PlayerMovementV4" parent="." index="13" instance=ExtResource("7_j06gp")]
 friction_std = 0.5
+impulse_std = 60.0
 afterburner_speed = 300.0
 afterburner_duration = 5.0
 afterburner_cooldown = 20.0
+acceleration_rate = 1.0
 
 [node name="Privateer-Cockpit-Centurion-Off" type="Sprite2D" parent="." index="14"]
 z_index = 1

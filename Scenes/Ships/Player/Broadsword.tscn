@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://g6eienmanry6"]
+[gd_scene load_steps=10 format=3 uid="uid://cditw4qrs18my"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/baseship.tscn" id="1_x3gcm"]
 [ext_resource type="Shader" uid="uid://k125ekjy4epu" path="res://Assets/Shaders/FresnelAura.tres" id="3_chlxn"]

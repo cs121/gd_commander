@@ -4,3 +4,4 @@
 
 [node name="VisualEffectSetting" type="Node"]
 script = ExtResource("1_khrhi")
+limit = 200
